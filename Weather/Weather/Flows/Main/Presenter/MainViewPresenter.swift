@@ -13,7 +13,7 @@ protocol MainViewProtocol: AnyObject {
 }
 
 protocol MainViewPresenterProtocol: AnyObject {
-    
+    func getData()
 }
 
 class MainViewPresenter: MainViewPresenterProtocol {
@@ -25,5 +25,15 @@ class MainViewPresenter: MainViewPresenterProtocol {
         self.view = view
         self.networkService = networkService
         self.router = router
+    }
+    
+    func getData() {
+        networkService.getData() { [weak self] data, error in
+            print(data)
+            
+            if let error = error {
+                print(error)
+            }
+        }
     }
 }
