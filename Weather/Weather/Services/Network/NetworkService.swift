@@ -6,29 +6,22 @@
 //
 
 import Foundation
-
-struct WeatherResponse: Decodable {
-    let list: [Weather]
-}
-
-struct Weather: Decodable {
-    let name: String
-}
+import CoreLocation
 
 protocol NetworkServiceProtocol {
-    func getData(completion: @escaping ([Weather]?, Error?) -> ())
+    func getCurrentWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: @escaping (WeatherResponse?, Error?) -> ())
 }
 
 class NetworkService {
     
-    /*
-     "https://api.openweathermap.org/data/2.5/find?q=\(searchBarText)&units=metric&type=like&APPID=a81356acdbd6b40ea93e32b38254aad2"
-    */
+    private let appID = "a81356acdbd6b40ea93e32b38254aad2"
     
-    private let weatherDataUrlString = "https://api.openweathermap.org/data/2.5/find?q=Minsk&units=metric&type=like&APPID=a81356acdbd6b40ea93e32b38254aad2"
+    //private var searchText = "Minsk" // temporary
     
-    private func fetchData(completion: @escaping (Data?, Error?) -> ()) {
-        guard let url = URL(string: weatherDataUrlString) else {
+    //private let weatherDataUrlString = "https://api.openweathermap.org/data/2.5/find?q=\(searchText)&units=metric&type=like&APPID=\(appID)" // temporary
+    
+    private func fetchData(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: @escaping (Data?, Error?) -> ()) {
+        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(appID)&units=metric") else {
             let error = NSError(domain: NSURLErrorDomain, code: NSURLErrorBadURL)
             completion(nil, error)
             return
@@ -49,15 +42,13 @@ class NetworkService {
         }
         dataTask.resume()
     }
-        
-
 }
 
 // MARK: - API
 
 extension NetworkService: NetworkServiceProtocol {
-    func getData(completion: @escaping ([Weather]?, Error?) -> ()) {
-        fetchData() { data, error in
+    func getCurrentWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: @escaping (WeatherResponse?, Error?) -> ()) {
+        fetchData(latitude: latitude, longitude: longitude) { data, error in
             if let error = error {
                 completion(nil, error)
                 return
@@ -68,11 +59,12 @@ extension NetworkService: NetworkServiceProtocol {
             
             do {
                 let weatherResponse = try decoder.decode(WeatherResponse.self, from: data)
-                completion(weatherResponse.list, nil)
+                completion(weatherResponse, nil)
             }
             catch let error {
                 completion(nil, error)
             }
-        }
+        }        
     }
 }
+
