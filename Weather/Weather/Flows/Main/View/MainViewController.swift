@@ -14,8 +14,8 @@ class MainViewController: UIViewController {
     // MARK: - Views
     
     private lazy var backgroundImage: UIImageView = {
-        let backgroundImage = UIImageView(image: UIImage(named: "background"))
-        backgroundImage.contentMode = .scaleAspectFill
+        let backgroundImage = UIImageView(image: UIImage(named: "city"))
+        backgroundImage.contentMode = .scaleAspectFit
         
         return backgroundImage
     }()
@@ -28,8 +28,6 @@ class MainViewController: UIViewController {
         cityNameLabel.font = .systemFont(ofSize: CGFloat(40).adaptedFontSize, weight: .bold)
         cityNameLabel.adjustsFontSizeToFitWidth = true
         cityNameLabel.minimumScaleFactor = 0.5
-        
-        cityNameLabel.text = "Minsk"
 
         return cityNameLabel
     }()
@@ -42,8 +40,6 @@ class MainViewController: UIViewController {
         currentTemperatureLabel.font = .systemFont(ofSize: CGFloat(70).adaptedFontSize, weight: .regular)
         currentTemperatureLabel.adjustsFontSizeToFitWidth = true
         currentTemperatureLabel.minimumScaleFactor = 0.5
-        
-        currentTemperatureLabel.text = "10°"
 
         return currentTemperatureLabel
     }()
@@ -63,7 +59,7 @@ class MainViewController: UIViewController {
 
 private extension MainViewController {
     func setupAppearance() {
-        
+        view.backgroundColor = .customPurple
     }
     
     func addSubviews() {
@@ -105,6 +101,8 @@ private extension MainViewController {
 extension MainViewController: MainViewProtocol {
     func updateView(with data: WeatherResponse) {
         print(data) // temporary
+        cityNameLabel.text = data.name
+        currentTemperatureLabel.text = "\(Int(data.main.feelsLike))°"
     }
 }
 

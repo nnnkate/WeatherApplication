@@ -24,6 +24,7 @@
 		85B0066C288728190000A3E4 /* AdaptiveLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B00666288728190000A3E4 /* AdaptiveLayoutHelper.swift */; };
 		85B0066F2887520E0000A3E4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B0066E2887520E0000A3E4 /* LocationManager.swift */; };
 		85B4CFE42887F59400D73A7E /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B4CFE32887F59400D73A7E /* WeatherResponse.swift */; };
+		85B4CFE728889C6000D73A7E /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B4CFE628889C6000D73A7E /* UIColor+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		85B00666288728190000A3E4 /* AdaptiveLayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdaptiveLayoutHelper.swift; sourceTree = "<group>"; };
 		85B0066E2887520E0000A3E4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		85B4CFE32887F59400D73A7E /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
+		85B4CFE628889C6000D73A7E /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 		85B0065C288728010000A3E4 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				85B4CFE528889C2000D73A7E /* Extensions */,
 				85B0065D288728190000A3E4 /* AdaptiveLayout */,
 			);
 			path = Library;
@@ -234,6 +237,14 @@
 				85B4CFE32887F59400D73A7E /* WeatherResponse.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		85B4CFE528889C2000D73A7E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				85B4CFE628889C6000D73A7E /* UIColor+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +328,7 @@
 				85064AF028870EFC00AF0677 /* MainViewPresenter.swift in Sources */,
 				85B0066C288728190000A3E4 /* AdaptiveLayoutHelper.swift in Sources */,
 				85064AD6288706FB00AF0677 /* AppDelegate.swift in Sources */,
+				85B4CFE728889C6000D73A7E /* UIColor+Extensions.swift in Sources */,
 				85B0066A288728190000A3E4 /* Int.swift in Sources */,
 				85064AEC28870BB200AF0677 /* ModuleBuilder.swift in Sources */,
 				85064AEE28870EAC00AF0677 /* NetworkService.swift in Sources */,
