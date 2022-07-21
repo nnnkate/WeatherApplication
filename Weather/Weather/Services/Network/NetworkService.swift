@@ -14,8 +14,9 @@ protocol NetworkServiceProtocol {
 
 class NetworkService {
     
-    private let appID = "a81356acdbd6b40ea93e32b38254aad2"
+    // MARK: - Private properties
     
+    private let appID = "a81356acdbd6b40ea93e32b38254aad2"
     
     // searchText
     //private var searchText = "Minsk" // temporary

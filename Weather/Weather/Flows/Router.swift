@@ -30,7 +30,6 @@ class Router: RouterProtocol {
         if let navigationController = navigationController  {
             guard let mainViewController = builder?.createMainModule(router: self) else { return }
             navigationController.viewControllers = [mainViewController]
-            //navigationController.pushViewController(mainViewController, animated: true)
         }
     }
 }
