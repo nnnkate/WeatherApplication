@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
         var cityNameLabel = UILabel()
         cityNameLabel.textColor = .white
         cityNameLabel.numberOfLines = 1
-        cityNameLabel.textAlignment = .center
+        cityNameLabel.textAlignment = .left
         cityNameLabel.font = .systemFont(ofSize: CGFloat(40).adaptedFontSize, weight: .bold)
         cityNameLabel.adjustsFontSizeToFitWidth = true
         cityNameLabel.minimumScaleFactor = 0.5
@@ -36,7 +36,7 @@ class MainViewController: UIViewController {
         var currentDateLabel = UILabel()
         currentDateLabel.textColor = .white
         currentDateLabel.numberOfLines = 1
-        currentDateLabel.textAlignment = .center
+        currentDateLabel.textAlignment = .left
         currentDateLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize, weight: .regular)
         currentDateLabel.adjustsFontSizeToFitWidth = true
         currentDateLabel.minimumScaleFactor = 0.5
@@ -48,7 +48,7 @@ class MainViewController: UIViewController {
         var currentTemperatureLabel = UILabel()
         currentTemperatureLabel.textColor = .white
         currentTemperatureLabel.numberOfLines = 1
-        currentTemperatureLabel.textAlignment = .center
+        currentTemperatureLabel.textAlignment = .right
         currentTemperatureLabel.font = .systemFont(ofSize: CGFloat(70).adaptedFontSize, weight: .regular)
         currentTemperatureLabel.adjustsFontSizeToFitWidth = true
         currentTemperatureLabel.minimumScaleFactor = 0.5
@@ -93,24 +93,24 @@ private extension MainViewController {
         
         cityNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cityNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             cityNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
+            cityNameLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor),
             cityNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.VAdapted),
             cityNameLabel.heightAnchor.constraint(equalTo: cityNameLabel.heightAnchor, constant: 50.VAdapted)
         ])
         
         currentDateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            currentDateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            currentDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            currentDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
+            currentDateLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor),
             currentDateLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 5.VAdapted),
             currentDateLabel.heightAnchor.constraint(equalTo: cityNameLabel.heightAnchor, constant: 10.VAdapted)
         ])
         
         currentTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            currentTemperatureLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            currentTemperatureLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
+            currentTemperatureLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.HAdapted),
+            currentTemperatureLabel.leadingAnchor.constraint(equalTo: view.centerXAnchor),
             currentTemperatureLabel.topAnchor.constraint(equalTo: currentDateLabel.bottomAnchor, constant: 5.VAdapted),
             currentTemperatureLabel.heightAnchor.constraint(equalTo: currentTemperatureLabel.heightAnchor, constant: 80.VAdapted)
         ])
