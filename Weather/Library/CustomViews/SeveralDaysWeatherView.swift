@@ -93,10 +93,7 @@ extension SeveralDaysWeatherView: UITableViewDataSource {
             return UITableViewCell()
         }
 
-//        let file = manager.filesData[indexPath.row]
-//        filesTableViewCell.updateData(file: file, selected: manager.selectedFiles.contains(file))
-//
-//        filesTableViewCell.selectionStyle = .none
+        daysWeatherDataTableViewCell.updateData()
 
         return daysWeatherDataTableViewCell
     }

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TableViewCell {
+    func updateData()
+}
+
 class DaysWeatherDataTableViewCell: UITableViewCell {
 
     static let id = "DaysWeatherDataTableViewCell"
@@ -36,7 +40,7 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
         temperatureLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
         temperatureLabel.textColor = .black
         
-        temperatureLabel.text = "11"
+        temperatureLabel.text = "11°"
         
         return temperatureLabel
     }()
@@ -94,5 +98,11 @@ private extension DaysWeatherDataTableViewCell {
             horizontalStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
             horizontalStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 5)
         ])
+    }
+}
+
+extension DaysWeatherDataTableViewCell: TableViewCell {
+    func updateData() {
+        print("update")
     }
 }
