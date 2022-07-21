@@ -11,6 +11,10 @@ class MainViewController: UIViewController {
     
     var presenter: MainViewPresenterProtocol!
     
+    // MARK: - Private properties
+    
+    private lazy var severalDaysWeatherViewHeight = CGFloat(presenter.getTimestampsNumber()) * 50
+    
     // MARK: - Views
     
     private lazy var backgroundImageView: UIImageView = {
@@ -107,7 +111,7 @@ private extension MainViewController {
             cityNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
             cityNameLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor),
             cityNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.VAdapted),
-            cityNameLabel.heightAnchor.constraint(equalToConstant: 40.VAdapted)
+            cityNameLabel.heightAnchor.constraint(equalToConstant: 45.VAdapted)
         ])
         
         currentDateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -115,7 +119,7 @@ private extension MainViewController {
             currentDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
             currentDateLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor),
             currentDateLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 5.VAdapted),
-            currentDateLabel.heightAnchor.constraint(equalToConstant: 10.VAdapted)
+            currentDateLabel.heightAnchor.constraint(equalToConstant: 25.VAdapted)
         ])
         
         weatherConditionImage.translatesAutoresizingMaskIntoConstraints = false
@@ -147,7 +151,7 @@ private extension MainViewController {
             severalDaysWeatherView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             severalDaysWeatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
             severalDaysWeatherView.topAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: 20.VAdapted),
-            severalDaysWeatherView.heightAnchor.constraint(equalToConstant: Int(CGFloat(presenter.getTimestampsNumber()) * 50).VAdapted)
+            severalDaysWeatherView.heightAnchor.constraint(equalToConstant: Int(severalDaysWeatherViewHeight).VAdapted)
         ])
     }
 }
