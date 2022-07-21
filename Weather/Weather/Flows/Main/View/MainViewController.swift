@@ -23,7 +23,7 @@ class MainViewController: UIViewController {
     private lazy var cityNameLabel: UILabel = {
         var cityNameLabel = UILabel()
         cityNameLabel.textColor = .white
-        cityNameLabel.numberOfLines = 0
+        cityNameLabel.numberOfLines = 1
         cityNameLabel.textAlignment = .center
         cityNameLabel.font = .systemFont(ofSize: CGFloat(40).adaptedFontSize, weight: .bold)
         cityNameLabel.adjustsFontSizeToFitWidth = true
@@ -32,10 +32,22 @@ class MainViewController: UIViewController {
         return cityNameLabel
     }()
     
+    private lazy var currentDateLabel: UILabel = {
+        var currentDateLabel = UILabel()
+        currentDateLabel.textColor = .white
+        currentDateLabel.numberOfLines = 1
+        currentDateLabel.textAlignment = .center
+        currentDateLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize, weight: .regular)
+        currentDateLabel.adjustsFontSizeToFitWidth = true
+        currentDateLabel.minimumScaleFactor = 0.5
+
+        return currentDateLabel
+    }()
+    
     private lazy var currentTemperatureLabel: UILabel = {
         var currentTemperatureLabel = UILabel()
         currentTemperatureLabel.textColor = .white
-        currentTemperatureLabel.numberOfLines = 0
+        currentTemperatureLabel.numberOfLines = 1
         currentTemperatureLabel.textAlignment = .center
         currentTemperatureLabel.font = .systemFont(ofSize: CGFloat(70).adaptedFontSize, weight: .regular)
         currentTemperatureLabel.adjustsFontSizeToFitWidth = true
@@ -51,7 +63,7 @@ class MainViewController: UIViewController {
         addSubviews()
         configureLayout()
         
-        presenter.getData()
+        presenter.getCurrentWeather()
     }
 }
 
@@ -66,6 +78,7 @@ private extension MainViewController {
         view.addSubview(backgroundImage)
         
         view.addSubview(cityNameLabel)
+        view.addSubview(currentDateLabel)
         view.addSubview(currentTemperatureLabel)
     }
     
@@ -74,7 +87,7 @@ private extension MainViewController {
         NSLayoutConstraint.activate([
             backgroundImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             backgroundImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
             backgroundImage.topAnchor.constraint(equalTo: view.topAnchor)
         ])
         
@@ -82,15 +95,23 @@ private extension MainViewController {
         NSLayoutConstraint.activate([
             cityNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             cityNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
-            cityNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40.VAdapted),
+            cityNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.VAdapted),
             cityNameLabel.heightAnchor.constraint(equalTo: cityNameLabel.heightAnchor, constant: 50.VAdapted)
+        ])
+        
+        currentDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            currentDateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            currentDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            currentDateLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 5.VAdapted),
+            currentDateLabel.heightAnchor.constraint(equalTo: cityNameLabel.heightAnchor, constant: 10.VAdapted)
         ])
         
         currentTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             currentTemperatureLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             currentTemperatureLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
-            currentTemperatureLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 5.VAdapted),
+            currentTemperatureLabel.topAnchor.constraint(equalTo: currentDateLabel.bottomAnchor, constant: 5.VAdapted),
             currentTemperatureLabel.heightAnchor.constraint(equalTo: currentTemperatureLabel.heightAnchor, constant: 80.VAdapted)
         ])
     }
@@ -102,6 +123,7 @@ extension MainViewController: MainViewProtocol {
     func updateView(with data: WeatherResponse) {
         print(data) // temporary
         cityNameLabel.text = data.name
+        currentDateLabel.text = "Today, \(Date().formatted(.dateTime.month().day().hour().minute()))"
         currentTemperatureLabel.text = "\(Int(data.main.feelsLike))°"
     }
 }

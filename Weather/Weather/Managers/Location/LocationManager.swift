@@ -11,9 +11,7 @@ import CoreLocation
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
     let manager = CLLocationManager()
-    
     var location: CLLocation?
-    var isLoading = false
     
     override init() {
         super.init()

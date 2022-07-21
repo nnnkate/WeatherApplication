@@ -13,15 +13,15 @@ protocol MainViewProtocol: AnyObject {
 }
 
 protocol MainViewPresenterProtocol: AnyObject {
-    func getData()
+    func getCurrentWeather()
 }
 
 class MainViewPresenter: MainViewPresenterProtocol {
-    private let networkService: NetworkServiceProtocol
     private var router: RouterProtocol?
     weak var view: MainViewProtocol?
+    private let networkService: NetworkServiceProtocol
     
-    let locationManager = LocationManager()
+    private let locationManager = LocationManager()
 
     required init(view: MainViewProtocol, router: RouterProtocol, networkService: NetworkServiceProtocol) {
         self.view = view
@@ -29,7 +29,7 @@ class MainViewPresenter: MainViewPresenterProtocol {
         self.router = router
     }
     
-    func getData() {
+    func getCurrentWeather() {
         guard let location = locationManager.location else { return }
         networkService.getCurrentWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { [weak self] data, error in
             guard let weatherResponse = data else { return }
