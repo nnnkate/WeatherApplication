@@ -46,7 +46,7 @@ class MainViewController: UIViewController {
     
     private lazy var weatherConditionImage: UIImageView = {
         let weatherConditionImage = UIImageView()
-        weatherConditionImage.contentMode = .scaleAspectFill
+        weatherConditionImage.contentMode = .scaleAspectFit
         weatherConditionImage.tintColor = .white
         
         return weatherConditionImage
@@ -105,7 +105,7 @@ private extension MainViewController {
             cityNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
             cityNameLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor),
             cityNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.VAdapted),
-            cityNameLabel.heightAnchor.constraint(equalTo: cityNameLabel.heightAnchor, constant: 50.VAdapted)
+            cityNameLabel.heightAnchor.constraint(equalTo: cityNameLabel.heightAnchor, constant: 40.VAdapted)
         ])
         
         currentDateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -113,17 +113,17 @@ private extension MainViewController {
             currentDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
             currentDateLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor),
             currentDateLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 5.VAdapted),
-            currentDateLabel.heightAnchor.constraint(equalTo: cityNameLabel.heightAnchor, constant: 10.VAdapted)
+            currentDateLabel.heightAnchor.constraint(equalTo: currentDateLabel.heightAnchor, constant: 10.VAdapted)
         ])
         
         weatherConditionImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             weatherConditionImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
-            weatherConditionImage.centerYAnchor.constraint(equalTo: currentTemperatureLabel.centerYAnchor, constant: 5.VAdapted),
-            weatherConditionImage.heightAnchor.constraint(equalTo: currentTemperatureLabel.heightAnchor, multiplier: 0.7),
+            weatherConditionImage.centerYAnchor.constraint(equalTo: currentTemperatureLabel.centerYAnchor),
+            weatherConditionImage.heightAnchor.constraint(equalTo: currentTemperatureLabel.heightAnchor, multiplier: 0.9),
             weatherConditionImage.widthAnchor.constraint(equalTo: weatherConditionImage.heightAnchor)
         ])
-        
+       
         currentTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             currentTemperatureLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.HAdapted),
