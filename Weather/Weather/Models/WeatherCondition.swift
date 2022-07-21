@@ -46,7 +46,7 @@ enum WeatherCondition: String {
         case .clear:
             return UIImage(systemName: "sun.max")
         case .clouds:
-            return UIImage(systemName: "cloud.drizzle")
+            return UIImage(systemName: "cloud")
         default:
             return UIImage(systemName: "sun.and.horizon")
         }
