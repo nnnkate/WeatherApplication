@@ -44,6 +44,14 @@ class MainViewController: UIViewController {
         return currentDateLabel
     }()
     
+    private lazy var weatherConditionImage: UIImageView = {
+        let weatherConditionImage = UIImageView()
+        weatherConditionImage.contentMode = .scaleAspectFill
+        weatherConditionImage.tintColor = .white
+        
+        return weatherConditionImage
+    }()
+    
     private lazy var currentTemperatureLabel: UILabel = {
         var currentTemperatureLabel = UILabel()
         currentTemperatureLabel.textColor = .white
@@ -79,6 +87,7 @@ private extension MainViewController {
         
         view.addSubview(cityNameLabel)
         view.addSubview(currentDateLabel)
+        view.addSubview(weatherConditionImage)
         view.addSubview(currentTemperatureLabel)
     }
     
@@ -107,6 +116,15 @@ private extension MainViewController {
             currentDateLabel.heightAnchor.constraint(equalTo: cityNameLabel.heightAnchor, constant: 10.VAdapted)
         ])
         
+        weatherConditionImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            weatherConditionImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
+            //weatherConditionImage.trailingAnchor.constraint(equalTo: view.centerXAnchor),
+            weatherConditionImage.centerYAnchor.constraint(equalTo: currentTemperatureLabel.centerYAnchor, constant: 5.VAdapted),
+            weatherConditionImage.heightAnchor.constraint(equalTo: weatherConditionImage.heightAnchor, constant: 80.VAdapted),
+            weatherConditionImage.widthAnchor.constraint(equalTo: weatherConditionImage.heightAnchor)
+        ])
+        
         currentTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             currentTemperatureLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.HAdapted),
@@ -125,6 +143,9 @@ extension MainViewController: MainViewProtocol {
         cityNameLabel.text = data.name
         currentDateLabel.text = "Today, \(Date().formatted(.dateTime.month().day().hour().minute()))"
         currentTemperatureLabel.text = "\(Int(data.main.feelsLike))°"
+        
+        guard let weatherCondition = WeatherCondition(id: data.weather.first?.id ?? 0) else { return }
+        self.weatherConditionImage.image = weatherCondition.image
     }
 }
 

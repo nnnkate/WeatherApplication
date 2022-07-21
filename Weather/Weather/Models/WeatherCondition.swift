@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum WeatherCondition: String {
     case none
@@ -17,8 +18,8 @@ enum WeatherCondition: String {
     case clear
     case clouds
 
-    init?(index: Int) {
-        switch index {
+    init?(id: Double) {
+        switch id {
         case 200...299: self = .thunderstorm
         case 300...399: self = .drizzle
         case 500...599: self = .rain
@@ -28,5 +29,9 @@ enum WeatherCondition: String {
         case 801...899: self = .clouds
         default: return nil
         }
+    }
+    
+    var image: UIImage? {
+        UIImage(systemName: "sun.max")
     }
 }

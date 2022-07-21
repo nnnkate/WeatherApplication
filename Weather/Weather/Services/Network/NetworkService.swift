@@ -15,7 +15,7 @@ protocol NetworkServiceProtocol {
 class NetworkService {
     
     private let appID = "a81356acdbd6b40ea93e32b38254aad2"
-    
+
     //private var searchText = "Minsk" // temporary
     
     //private let weatherDataUrlString = "https://api.openweathermap.org/data/2.5/find?q=\(searchText)&units=metric&type=like&APPID=\(appID)" // temporary
