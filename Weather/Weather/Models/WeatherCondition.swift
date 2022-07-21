@@ -32,6 +32,23 @@ enum WeatherCondition: String {
     }
     
     var image: UIImage? {
-        UIImage(systemName: "sun.max")
+        switch self {
+        case .thunderstorm:
+            return UIImage(systemName: "cloud.bolt.rain")
+        case .drizzle:
+            return UIImage(systemName: "cloud.drizzle")
+        case .rain:
+            return UIImage(systemName: "cloud.heavyrain")
+        case .snow:
+            return UIImage(systemName: "cloud.snow")
+        case .atmosphere:
+            return UIImage(systemName: "cloud.fog")
+        case .clear:
+            return UIImage(systemName: "sun.max")
+        case .clouds:
+            return UIImage(systemName: "cloud.drizzle")
+        default:
+            return UIImage(systemName: "sun.and.horizon")
+        }
     }
 }

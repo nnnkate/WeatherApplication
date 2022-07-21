@@ -119,9 +119,8 @@ private extension MainViewController {
         weatherConditionImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             weatherConditionImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
-            //weatherConditionImage.trailingAnchor.constraint(equalTo: view.centerXAnchor),
             weatherConditionImage.centerYAnchor.constraint(equalTo: currentTemperatureLabel.centerYAnchor, constant: 5.VAdapted),
-            weatherConditionImage.heightAnchor.constraint(equalTo: weatherConditionImage.heightAnchor, constant: 80.VAdapted),
+            weatherConditionImage.heightAnchor.constraint(equalTo: currentTemperatureLabel.heightAnchor, multiplier: 0.7),
             weatherConditionImage.widthAnchor.constraint(equalTo: weatherConditionImage.heightAnchor)
         ])
         
