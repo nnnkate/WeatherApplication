@@ -63,6 +63,8 @@ class MainViewController: UIViewController {
 
         return currentTemperatureLabel
     }()
+    
+    // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()

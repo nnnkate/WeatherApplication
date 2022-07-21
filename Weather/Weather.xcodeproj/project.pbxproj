@@ -26,6 +26,7 @@
 		85B4CFE42887F59400D73A7E /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B4CFE32887F59400D73A7E /* WeatherResponse.swift */; };
 		85B4CFE728889C6000D73A7E /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B4CFE628889C6000D73A7E /* UIColor+Extensions.swift */; };
 		85B4CFEA2889580C00D73A7E /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B4CFE92889580B00D73A7E /* WeatherCondition.swift */; };
+		85E1248728897D6D001ADB24 /* SeveralDaysWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E1248628897D6D001ADB24 /* SeveralDaysWeatherView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		85B4CFE32887F59400D73A7E /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		85B4CFE628889C6000D73A7E /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		85B4CFE92889580B00D73A7E /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
+		85E1248628897D6D001ADB24 /* SeveralDaysWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeveralDaysWeatherView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 		85B0065C288728010000A3E4 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				85E1248528897D0A001ADB24 /* CustomViews */,
 				85B4CFE528889C2000D73A7E /* Extensions */,
 				85B0065D288728190000A3E4 /* AdaptiveLayout */,
 			);
@@ -248,6 +251,14 @@
 				85B4CFE628889C6000D73A7E /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		85E1248528897D0A001ADB24 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				85E1248628897D6D001ADB24 /* SeveralDaysWeatherView.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,6 +348,7 @@
 				85064AEC28870BB200AF0677 /* ModuleBuilder.swift in Sources */,
 				85064AEE28870EAC00AF0677 /* NetworkService.swift in Sources */,
 				85064AD8288706FB00AF0677 /* SceneDelegate.swift in Sources */,
+				85E1248728897D6D001ADB24 /* SeveralDaysWeatherView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

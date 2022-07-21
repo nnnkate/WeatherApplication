@@ -15,10 +15,14 @@ protocol NetworkServiceProtocol {
 class NetworkService {
     
     private let appID = "a81356acdbd6b40ea93e32b38254aad2"
-
-    //private var searchText = "Minsk" // temporary
     
+    
+    // searchText
+    //private var searchText = "Minsk" // temporary
     //private let weatherDataUrlString = "https://api.openweathermap.org/data/2.5/find?q=\(searchText)&units=metric&type=like&APPID=\(appID)" // temporary
+    
+    // 5 days
+    //https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&appid=\(appID) // temporary
     
     private func fetchData(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: @escaping (Data?, Error?) -> ()) {
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(appID)&units=metric") else {

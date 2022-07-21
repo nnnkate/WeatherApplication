@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 protocol MainViewProtocol: AnyObject {
     func updateView(with data: WeatherResponse)
 }
@@ -16,9 +15,15 @@ protocol MainViewPresenterProtocol: AnyObject {
     func getCurrentWeather()
 }
 
-class MainViewPresenter: MainViewPresenterProtocol {
-    private var router: RouterProtocol?
+class MainViewPresenter {
+    
+    // MARK: - Public properties
+    
     weak var view: MainViewProtocol?
+    
+    // MARK: - Private properties
+    
+    private var router: RouterProtocol?
     private let networkService: NetworkServiceProtocol
     
     private let locationManager = LocationManager()
@@ -28,7 +33,11 @@ class MainViewPresenter: MainViewPresenterProtocol {
         self.networkService = networkService
         self.router = router
     }
-    
+}
+
+// MARK: - MainViewPresenterProtocol
+
+extension MainViewPresenter: MainViewPresenterProtocol {
     func getCurrentWeather() {
         guard let location = locationManager.location else { return }
         networkService.getCurrentWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { [weak self] data, error in
@@ -40,6 +49,4 @@ class MainViewPresenter: MainViewPresenterProtocol {
             }
         }
     }
-    
-    
 }
