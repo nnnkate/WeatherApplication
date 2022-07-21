@@ -34,7 +34,7 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
     var temperatureLabel: UILabel = {
         let temperatureLabel = UILabel()
         temperatureLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
-        temperatureLabel.tintColor = .darkGray
+        temperatureLabel.textColor = .black
         
         temperatureLabel.text = "11"
         
@@ -94,10 +94,5 @@ private extension DaysWeatherDataTableViewCell {
             horizontalStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
             horizontalStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 5)
         ])
-        
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
-//        ])
     }
 }
