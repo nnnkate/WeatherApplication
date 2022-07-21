@@ -13,11 +13,11 @@ class MainViewController: UIViewController {
     
     // MARK: - Views
     
-    private lazy var backgroundImage: UIImageView = {
-        let backgroundImage = UIImageView(image: UIImage(named: "city"))
-        backgroundImage.contentMode = .scaleAspectFit
+    private lazy var backgroundImageView: UIImageView = {
+        let backgroundImageView = UIImageView(image: UIImage(named: "city"))
+        backgroundImageView.contentMode = .scaleAspectFit
         
-        return backgroundImage
+        return backgroundImageView
     }()
     
     private lazy var cityNameLabel: UILabel = {
@@ -64,6 +64,12 @@ class MainViewController: UIViewController {
         return currentTemperatureLabel
     }()
     
+    private lazy var severalDaysWeatherView: SeveralDaysWeatherView = {
+        var severalDaysWeatherView = SeveralDaysWeatherView()
+        
+        return severalDaysWeatherView
+    }()
+    
     // MARK: - UIViewController
 
     override func viewDidLoad() {
@@ -85,23 +91,17 @@ private extension MainViewController {
     }
     
     func addSubviews() {
-        view.addSubview(backgroundImage)
+        view.addSubview(backgroundImageView)
         
         view.addSubview(cityNameLabel)
         view.addSubview(currentDateLabel)
         view.addSubview(weatherConditionImage)
         view.addSubview(currentTemperatureLabel)
+        
+        view.addSubview(severalDaysWeatherView)
     }
     
     func configureLayout() {
-        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            backgroundImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            backgroundImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
-            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor)
-        ])
-        
         cityNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             cityNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
@@ -132,6 +132,22 @@ private extension MainViewController {
             currentTemperatureLabel.leadingAnchor.constraint(equalTo: view.centerXAnchor),
             currentTemperatureLabel.topAnchor.constraint(equalTo: currentDateLabel.bottomAnchor, constant: 5.VAdapted),
             currentTemperatureLabel.heightAnchor.constraint(equalTo: currentTemperatureLabel.heightAnchor, constant: 80.VAdapted)
+        ])
+        
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30.HAdapted),
+            backgroundImageView.topAnchor.constraint(equalTo: currentTemperatureLabel.bottomAnchor, constant: 5.VAdapted),
+            backgroundImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
+        ])
+            
+        severalDaysWeatherView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            severalDaysWeatherView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            severalDaysWeatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
+            severalDaysWeatherView.topAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: 20.VAdapted),
+            severalDaysWeatherView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2) // TODO: rows count * row's height
         ])
     }
 }
