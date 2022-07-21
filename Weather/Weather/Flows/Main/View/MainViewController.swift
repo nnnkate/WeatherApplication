@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     private lazy var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(image: UIImage(named: "city"))
         backgroundImageView.contentMode = .scaleAspectFit
-        
+       
         return backgroundImageView
     }()
     
@@ -65,7 +65,7 @@ class MainViewController: UIViewController {
     }()
     
     private lazy var severalDaysWeatherView: SeveralDaysWeatherView = {
-        var severalDaysWeatherView = SeveralDaysWeatherView()
+        var severalDaysWeatherView = SeveralDaysWeatherView(timestampsNumber: presenter.getTimestampsNumber())
         
         return severalDaysWeatherView
     }()
@@ -107,7 +107,7 @@ private extension MainViewController {
             cityNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
             cityNameLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor),
             cityNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.VAdapted),
-            cityNameLabel.heightAnchor.constraint(equalTo: cityNameLabel.heightAnchor, constant: 40.VAdapted)
+            cityNameLabel.heightAnchor.constraint(equalToConstant: 40.VAdapted)
         ])
         
         currentDateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -115,7 +115,7 @@ private extension MainViewController {
             currentDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
             currentDateLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor),
             currentDateLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 5.VAdapted),
-            currentDateLabel.heightAnchor.constraint(equalTo: currentDateLabel.heightAnchor, constant: 10.VAdapted)
+            currentDateLabel.heightAnchor.constraint(equalToConstant: 10.VAdapted)
         ])
         
         weatherConditionImage.translatesAutoresizingMaskIntoConstraints = false
@@ -131,7 +131,7 @@ private extension MainViewController {
             currentTemperatureLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.HAdapted),
             currentTemperatureLabel.leadingAnchor.constraint(equalTo: view.centerXAnchor),
             currentTemperatureLabel.topAnchor.constraint(equalTo: currentDateLabel.bottomAnchor, constant: 5.VAdapted),
-            currentTemperatureLabel.heightAnchor.constraint(equalTo: currentTemperatureLabel.heightAnchor, constant: 80.VAdapted)
+            currentTemperatureLabel.heightAnchor.constraint(equalToConstant: 80.VAdapted)
         ])
         
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -147,7 +147,7 @@ private extension MainViewController {
             severalDaysWeatherView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             severalDaysWeatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
             severalDaysWeatherView.topAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: 20.VAdapted),
-            severalDaysWeatherView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2) // TODO: rows count * row's height
+            severalDaysWeatherView.heightAnchor.constraint(equalToConstant: Int(CGFloat(presenter.getTimestampsNumber()) * 50).VAdapted)
         ])
     }
 }

@@ -28,6 +28,7 @@
 		85B4CFEA2889580C00D73A7E /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B4CFE92889580B00D73A7E /* WeatherCondition.swift */; };
 		85E1248728897D6D001ADB24 /* SeveralDaysWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E1248628897D6D001ADB24 /* SeveralDaysWeatherView.swift */; };
 		85E1248A28898426001ADB24 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E1248928898426001ADB24 /* UIView+Extensions.swift */; };
+		85E124902889B1B0001ADB24 /* DaysWeatherDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E1248F2889B1B0001ADB24 /* DaysWeatherDataTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		85B4CFE92889580B00D73A7E /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
 		85E1248628897D6D001ADB24 /* SeveralDaysWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeveralDaysWeatherView.swift; sourceTree = "<group>"; };
 		85E1248928898426001ADB24 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		85E1248F2889B1B0001ADB24 /* DaysWeatherDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysWeatherDataTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				85E1248628897D6D001ADB24 /* SeveralDaysWeatherView.swift */,
+				85E1248F2889B1B0001ADB24 /* DaysWeatherDataTableViewCell.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				85E1248A28898426001ADB24 /* UIView+Extensions.swift in Sources */,
 				85B0066A288728190000A3E4 /* Int.swift in Sources */,
 				85B4CFEA2889580C00D73A7E /* WeatherCondition.swift in Sources */,
+				85E124902889B1B0001ADB24 /* DaysWeatherDataTableViewCell.swift in Sources */,
 				85064AEC28870BB200AF0677 /* ModuleBuilder.swift in Sources */,
 				85064AEE28870EAC00AF0677 /* NetworkService.swift in Sources */,
 				85064AD8288706FB00AF0677 /* SceneDelegate.swift in Sources */,

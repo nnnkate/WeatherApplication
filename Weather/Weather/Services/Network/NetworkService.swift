@@ -9,12 +9,15 @@ import Foundation
 import CoreLocation
 
 protocol NetworkServiceProtocol {
+    var timestampsNumber: Int { get }
     func getCurrentWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: @escaping (WeatherResponse?, Error?) -> ())
 }
 
 class NetworkService {
     
     // MARK: - Private properties
+    
+    private(set) var timestampsNumber: Int = 5
     
     private let appID = "a81356acdbd6b40ea93e32b38254aad2"
     

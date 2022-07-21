@@ -10,8 +10,8 @@ import CoreLocation
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
-    let manager = CLLocationManager()
-    var location: CLLocation?
+    private let manager = CLLocationManager()
+    private(set) var location: CLLocation?
     
     override init() {
         super.init()

@@ -13,6 +13,7 @@ protocol MainViewProtocol: AnyObject {
 
 protocol MainViewPresenterProtocol: AnyObject {
     func getCurrentWeather()
+    func getTimestampsNumber() -> Int
 }
 
 class MainViewPresenter {
@@ -48,5 +49,9 @@ extension MainViewPresenter: MainViewPresenterProtocol {
                 print(error)
             }
         }
+    }
+    
+    func getTimestampsNumber() -> Int {
+        networkService.timestampsNumber
     }
 }
