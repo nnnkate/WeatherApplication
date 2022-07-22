@@ -78,18 +78,34 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         
         setupAppearance()
         addSubviews()
         configureLayout()
         
         presenter.getCurrentWeather()
+        presenter.getSeveralDaysWeather()
     }
 }
 
 // MARK: - Appearance Methods
 
 private extension MainViewController {
+    private func setupNavigationBar() {
+        let button: UIButton = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "list.dash"), for: .normal)
+        button.tintColor = .white
+        button.contentMode = .right
+        
+        let action = UIAction { [weak self] _ in self?.handleRightBarButtonItem() }
+        button.addAction(action, for: .touchUpInside)
+        
+        let rightBarButtonItem = UIBarButtonItem(customView: button)
+        
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
     func setupAppearance() {
         view.backgroundColor = .customPurple
     }
@@ -141,7 +157,7 @@ private extension MainViewController {
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30.HAdapted),
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
             backgroundImageView.topAnchor.constraint(equalTo: currentTemperatureLabel.bottomAnchor, constant: 5.VAdapted),
             backgroundImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
         ])
@@ -159,7 +175,7 @@ private extension MainViewController {
 // MARK: - MainViewProtocol
 
 extension MainViewController: MainViewProtocol {
-    func updateView(with data: WeatherResponse) {
+    func updateCurrentWeather(_ data: CurrentWeatherResponse) {
         print(data) // temporary
         cityNameLabel.text = data.name
         currentDateLabel.text = "Today, \(Date().formatted(.dateTime.month().day().hour().minute()))"
@@ -167,6 +183,19 @@ extension MainViewController: MainViewProtocol {
         
         guard let weatherCondition = WeatherCondition(id: data.weather.first?.id ?? 0) else { return }
         self.weatherConditionImage.image = weatherCondition.image
+    }
+    
+    func updateSeveralDaysWeather(_ data: SeveralDaysWeather) {
+        print(data) // temporary
+        severalDaysWeatherView.updateView(with: data)
+    }
+}
+
+// MARK: - Actions
+
+private extension MainViewController {
+    func handleRightBarButtonItem() {
+        print("+")
     }
 }
 

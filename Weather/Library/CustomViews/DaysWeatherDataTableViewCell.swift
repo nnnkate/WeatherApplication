@@ -8,7 +8,8 @@
 import UIKit
 
 protocol TableViewCell {
-    func updateData()
+    //func updateData(_ data: DayData?)
+    func updateData(_ data: String?)
 }
 
 class DaysWeatherDataTableViewCell: UITableViewCell {
@@ -102,7 +103,15 @@ private extension DaysWeatherDataTableViewCell {
 }
 
 extension DaysWeatherDataTableViewCell: TableViewCell {
-    func updateData() {
+    //func updateData(_ data: DayData?) {
+    func updateData(_ data: String?) {
         print("update")
+        guard let data = data else {
+            weakDayNameLabel.text = ""
+            return
+            
+        }
+       // weakDayNameLabel.text = data.date
+        weakDayNameLabel.text = data
     }
 }

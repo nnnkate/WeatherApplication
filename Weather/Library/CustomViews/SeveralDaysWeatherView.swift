@@ -11,6 +11,12 @@ import UIKit
 final class SeveralDaysWeatherView: UIView {
     
     private var timestampsNumber: Int
+    //private var daysWeatherData = [DayData]() {
+    private var daysWeatherData = [String]() {
+        didSet {
+            daysWeatherDataTableView.reloadData()
+        }
+    }
     
     private lazy var daysWeatherDataTableView: UITableView = {
         let daysWeatherDataTableView = UITableView()
@@ -41,8 +47,8 @@ final class SeveralDaysWeatherView: UIView {
     
     // MARK: - Public Methods
     
-    func updateView() {
-        
+    func updateView(with data: SeveralDaysWeather) {
+        daysWeatherData = data.list
     }
 }
 
@@ -93,8 +99,8 @@ extension SeveralDaysWeatherView: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        daysWeatherDataTableViewCell.updateData()
-
+        daysWeatherDataTableViewCell.updateData(daysWeatherData.count > indexPath.row ? daysWeatherData[indexPath.row] : nil)
+        
         return daysWeatherDataTableViewCell
     }
 }
