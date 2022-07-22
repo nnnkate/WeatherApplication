@@ -12,7 +12,7 @@ struct SeveralDaysWeatherResponse: Decodable {
 }
 
 struct SeveralDaysWeather: Decodable {
-    var list = [String]()
+    var list = [DayData]()
 
     init(response: SeveralDaysWeatherResponse) {
         var dateString = ""
@@ -20,7 +20,8 @@ struct SeveralDaysWeather: Decodable {
             let currentDateString = element.date.prefix(11)
             if dateString != currentDateString {
                 dateString = String(currentDateString)
-                self.list.append(dateString)
+                let mainResponse = element.main
+                self.list.append(DayData(main: mainResponse, date: dateString))
             }
         }
     }

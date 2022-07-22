@@ -11,8 +11,7 @@ import UIKit
 final class SeveralDaysWeatherView: UIView {
     
     private var timestampsNumber: Int
-    //private var daysWeatherData = [DayData]() {
-    private var daysWeatherData = [String]() {
+    private var daysWeatherData = [DayData]() {
         didSet {
             daysWeatherDataTableView.reloadData()
         }
