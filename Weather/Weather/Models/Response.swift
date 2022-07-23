@@ -23,7 +23,7 @@ struct SeveralDaysWeather: Decodable {
             if dateString != currentDateString {
                 dateString = String(currentDateString)
             
-                list.append(DayData(main: element.main, date: dateString))
+                list.append(DayData(main: element.main, weather: element.weather, date: dateString))
                 currentIndex += 1
             } else {
                 var currentDayDataMain = list[currentIndex-1].main
@@ -45,10 +45,12 @@ struct SeveralDaysWeather: Decodable {
 
 struct DayData: Decodable {
     var main: MainResponse
+    var weather: [Weather]
     var date: String
     
     private enum CodingKeys: String, CodingKey {
         case main
+        case weather
         case date = "dt_txt"
     }
 }

@@ -117,6 +117,10 @@ extension DaysWeatherDataTableViewCell: TableViewCell {
             
         }
         weakDayNameLabel.text = data.date
+        
+        guard let weatherCondition = WeatherCondition(id: data.weather.first?.id ?? 0) else { return }
+        self.weatherConditionImage.image = weatherCondition.image
+        
         minTemperatureLabel.text = "\(Int(data.main.tempMin))°"
         maxTemperatureLabel.text = "\(Int(data.main.tempMax))°"
     }
