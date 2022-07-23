@@ -35,14 +35,20 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
         return weatherConditionImage
     }()
     
-    var temperatureLabel: UILabel = {
-        let temperatureLabel = UILabel()
-        temperatureLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
-        temperatureLabel.textColor = .black
+    var maxTemperatureLabel: UILabel = {
+        let maxTemperatureLabel = UILabel()
+        maxTemperatureLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
+        maxTemperatureLabel.textColor = .black
         
-        temperatureLabel.text = "11°"
+        return maxTemperatureLabel
+    }()
+    
+    var minTemperatureLabel: UILabel = {
+        let minTemperatureLabel = UILabel()
+        minTemperatureLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
+        minTemperatureLabel.textColor = .black
         
-        return temperatureLabel
+        return minTemperatureLabel
     }()
     
     private let horizontalStack: UIStackView = {
@@ -87,7 +93,8 @@ private extension DaysWeatherDataTableViewCell {
         
         horizontalStack.addArrangedSubview(weakDayNameLabel)
         horizontalStack.addArrangedSubview(weatherConditionImage)
-        horizontalStack.addArrangedSubview(temperatureLabel)
+        horizontalStack.addArrangedSubview(minTemperatureLabel)
+        horizontalStack.addArrangedSubview(maxTemperatureLabel)
     }
     
     func configureLayout() {
@@ -109,6 +116,8 @@ extension DaysWeatherDataTableViewCell: TableViewCell {
             return
             
         }
-       weakDayNameLabel.text = data.date
+        weakDayNameLabel.text = data.date
+        minTemperatureLabel.text = "\(Int(data.main.tempMin))°"
+        maxTemperatureLabel.text = "\(Int(data.main.tempMax))°"
     }
 }
