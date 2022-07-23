@@ -114,9 +114,11 @@ extension DaysWeatherDataTableViewCell: TableViewCell {
         guard let data = data else {
             weakDayNameLabel.text = ""
             return
-            
         }
-        weakDayNameLabel.text = data.date
+        
+        if let date = data.date.getDate() {
+            weakDayNameLabel.text = DateFormatter().weekdaySymbols[Calendar.current.component(.weekday, from: date)-1]
+        }
         
         guard let weatherCondition = WeatherCondition(id: data.weather.first?.id ?? 0) else { return }
         self.weatherConditionImage.image = weatherCondition.image

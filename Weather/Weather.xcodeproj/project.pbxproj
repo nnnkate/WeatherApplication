@@ -29,6 +29,7 @@
 		85E1248728897D6D001ADB24 /* SeveralDaysWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E1248628897D6D001ADB24 /* SeveralDaysWeatherView.swift */; };
 		85E1248A28898426001ADB24 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E1248928898426001ADB24 /* UIView+Extensions.swift */; };
 		85E124902889B1B0001ADB24 /* DaysWeatherDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E1248F2889B1B0001ADB24 /* DaysWeatherDataTableViewCell.swift */; };
+		85E12492288BF501001ADB24 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E12491288BF501001ADB24 /* String+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		85E1248628897D6D001ADB24 /* SeveralDaysWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeveralDaysWeatherView.swift; sourceTree = "<group>"; };
 		85E1248928898426001ADB24 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		85E1248F2889B1B0001ADB24 /* DaysWeatherDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysWeatherDataTableViewCell.swift; sourceTree = "<group>"; };
+		85E12491288BF501001ADB24 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +256,7 @@
 			children = (
 				85B4CFE628889C6000D73A7E /* UIColor+Extensions.swift */,
 				85E1248928898426001ADB24 /* UIView+Extensions.swift */,
+				85E12491288BF501001ADB24 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85B0066F2887520E0000A3E4 /* LocationManager.swift in Sources */,
+				85E12492288BF501001ADB24 /* String+Extensions.swift in Sources */,
 				85B4CFE42887F59400D73A7E /* Response.swift in Sources */,
 				85B0066B288728190000A3E4 /* CGFloat.swift in Sources */,
 				85B00667288728190000A3E4 /* Dimension.swift in Sources */,
