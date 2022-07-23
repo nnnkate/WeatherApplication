@@ -82,10 +82,6 @@ extension SeveralDaysWeatherView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         50
     }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
 }
 
 extension SeveralDaysWeatherView: UITableViewDataSource {
@@ -93,6 +89,10 @@ extension SeveralDaysWeatherView: UITableViewDataSource {
         timestampsNumber
     }
     
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let daysWeatherDataTableViewCell = daysWeatherDataTableView.dequeueReusableCell(withIdentifier: DaysWeatherDataTableViewCell.id) as? DaysWeatherDataTableViewCell else {
             return UITableViewCell()
