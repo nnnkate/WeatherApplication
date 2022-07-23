@@ -30,8 +30,6 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
         weatherConditionImage.contentMode = .scaleAspectFit
         weatherConditionImage.tintColor = .black
         
-        weatherConditionImage.image = UIImage(systemName: "sun.min")
-        
         return weatherConditionImage
     }()
     
@@ -43,6 +41,15 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
         return maxTemperatureLabel
     }()
     
+    private lazy var separateImage: UIImageView = {
+        let separateImage = UIImageView()
+        separateImage.tintColor = .black
+        
+        separateImage.image = UIImage(systemName: "minus")
+        
+        return separateImage
+    }()
+    
     var minTemperatureLabel: UILabel = {
         let minTemperatureLabel = UILabel()
         minTemperatureLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
@@ -51,9 +58,20 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
         return minTemperatureLabel
     }()
     
-    private let horizontalStack: UIStackView = {
+    private let temperatureHorizontalStack: UIStackView = {
+        let temperatureHorizontalStack = UIStackView()
+        temperatureHorizontalStack.axis = .horizontal
+        temperatureHorizontalStack.distribution = .equalSpacing
+        temperatureHorizontalStack.alignment = .center
+        temperatureHorizontalStack.spacing = 10
+        
+        return temperatureHorizontalStack
+    }()
+    
+    private let mainHorizontalStack: UIStackView = {
         let horizontalStack = UIStackView()
         horizontalStack.axis = .horizontal
+        horizontalStack.distribution = .equalCentering
         horizontalStack.alignment = .center
         horizontalStack.spacing = 10
         
@@ -89,28 +107,30 @@ private extension DaysWeatherDataTableViewCell {
     }
     
     func addSubviews() {
-        addSubview(horizontalStack)
+        addSubview(mainHorizontalStack)
         
-        horizontalStack.addArrangedSubview(weakDayNameLabel)
-        horizontalStack.addArrangedSubview(weatherConditionImage)
-        horizontalStack.addArrangedSubview(minTemperatureLabel)
-        horizontalStack.addArrangedSubview(maxTemperatureLabel)
+        mainHorizontalStack.addArrangedSubview(weakDayNameLabel)
+        mainHorizontalStack.addArrangedSubview(temperatureHorizontalStack)
+        
+        temperatureHorizontalStack.addArrangedSubview(weatherConditionImage)
+        temperatureHorizontalStack.addArrangedSubview(minTemperatureLabel)
+        temperatureHorizontalStack.addArrangedSubview(separateImage)
+        temperatureHorizontalStack.addArrangedSubview(maxTemperatureLabel)
     }
     
     func configureLayout() {
-        horizontalStack.translatesAutoresizingMaskIntoConstraints = false
+        mainHorizontalStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            horizontalStack.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            horizontalStack.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            horizontalStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
-            horizontalStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 5)
+            mainHorizontalStack.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            mainHorizontalStack.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            mainHorizontalStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
+            mainHorizontalStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 5)
         ])
     }
 }
 
 extension DaysWeatherDataTableViewCell: TableViewCell {
     func updateData(_ data: DayData?) {
-        print("update")
         guard let data = data else {
             weakDayNameLabel.text = ""
             return
