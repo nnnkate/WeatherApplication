@@ -79,7 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				85064AD4288706FB00AF0677 /* Weather */,
-				85B0065C288728010000A3E4 /* Library */,
 				85064AD3288706FB00AF0677 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -100,6 +99,7 @@
 				85064AFA28871A4500AF0677 /* Flows */,
 				85064AF6288717A300AF0677 /* Services */,
 				85B4CFE12887E7C200D73A7E /* Managers */,
+				85B0065C288728010000A3E4 /* Library */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
