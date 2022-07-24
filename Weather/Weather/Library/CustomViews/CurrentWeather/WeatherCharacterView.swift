@@ -83,12 +83,8 @@ final class WeatherCharacterView: UIView {
 
 private extension WeatherCharacterView {
     private func setupApearance(character: WeatherCharacter) {
-        //self.backgroundColor = .yellow
-        //self.layer.opacity = 1
-        
         weatherCharacterImage.image = character.image
         characterNameLabel.text = character.title
-        
     }
     
     func addSubviews() {

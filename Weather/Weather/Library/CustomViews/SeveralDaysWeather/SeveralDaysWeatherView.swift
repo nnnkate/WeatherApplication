@@ -10,6 +10,8 @@ import UIKit
 
 final class SeveralDaysWeatherView: UIView {
     
+    // MARK: - Private properties
+    
     private var timestampsNumber: Int
     private var daysWeatherData = [DayData]() {
         didSet {

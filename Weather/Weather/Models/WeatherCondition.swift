@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum WeatherCondition: String {
+enum WeatherCondition {
     case none
     case thunderstorm
     case drizzle

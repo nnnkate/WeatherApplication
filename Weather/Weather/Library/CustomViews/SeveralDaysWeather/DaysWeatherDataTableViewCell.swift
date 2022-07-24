@@ -12,6 +12,8 @@ protocol TableViewCell {
 }
 
 class DaysWeatherDataTableViewCell: UITableViewCell {
+    
+    // MARK: - Static properties
 
     static let id = "DaysWeatherDataTableViewCell"
     
