@@ -68,6 +68,12 @@ class MainViewController: UIViewController {
         return currentTemperatureLabel
     }()
     
+    private lazy var weatherCharactersView: WeatherCharactersView = {
+        var weatherCharactersView = WeatherCharactersView()
+        
+        return weatherCharactersView
+    }()
+    
     private lazy var severalDaysWeatherView: SeveralDaysWeatherView = {
         var severalDaysWeatherView = SeveralDaysWeatherView(timestampsNumber: presenter.getTimestampsNumber())
         
@@ -118,6 +124,7 @@ private extension MainViewController {
         view.addSubview(weatherConditionImage)
         view.addSubview(currentTemperatureLabel)
         
+        view.addSubview(weatherCharactersView)
         view.addSubview(severalDaysWeatherView)
     }
     
@@ -126,7 +133,7 @@ private extension MainViewController {
         NSLayoutConstraint.activate([
             cityNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
             cityNameLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor),
-            cityNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.VAdapted),
+            cityNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10.VAdapted),
             cityNameLabel.heightAnchor.constraint(equalToConstant: 45.VAdapted)
         ])
         
@@ -161,12 +168,20 @@ private extension MainViewController {
             backgroundImageView.topAnchor.constraint(equalTo: currentTemperatureLabel.bottomAnchor, constant: 5.VAdapted),
             backgroundImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
         ])
-            
+        
+        weatherCharactersView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            weatherCharactersView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            weatherCharactersView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
+            weatherCharactersView.topAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: 20.VAdapted),
+            weatherCharactersView.heightAnchor.constraint(equalToConstant: 100.VAdapted)
+        ])
+        
         severalDaysWeatherView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             severalDaysWeatherView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             severalDaysWeatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
-            severalDaysWeatherView.topAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: 20.VAdapted),
+            severalDaysWeatherView.topAnchor.constraint(equalTo: weatherCharactersView.bottomAnchor, constant: 20.VAdapted),
             severalDaysWeatherView.heightAnchor.constraint(equalToConstant: Int(severalDaysWeatherViewHeight).VAdapted)
         ])
     }

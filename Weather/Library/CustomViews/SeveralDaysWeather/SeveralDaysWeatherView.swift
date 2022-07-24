@@ -17,6 +17,18 @@ final class SeveralDaysWeatherView: UIView {
         }
     }
     
+    // MARK: - Views
+    
+    private lazy var weakDayNameLabel: UILabel = {
+        let weakDayNameLabel = UILabel()
+        weakDayNameLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
+        weakDayNameLabel.textColor = .black
+        
+        weakDayNameLabel.text = "Today"
+        
+        return weakDayNameLabel
+    }()
+    
     private lazy var daysWeatherDataTableView: UITableView = {
         let daysWeatherDataTableView = UITableView()
         daysWeatherDataTableView.backgroundColor = .clear
@@ -68,10 +80,10 @@ private extension SeveralDaysWeatherView {
     func configureLayout() {
         daysWeatherDataTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            daysWeatherDataTableView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            daysWeatherDataTableView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            daysWeatherDataTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            daysWeatherDataTableView.topAnchor.constraint(equalTo: self.topAnchor)
+            daysWeatherDataTableView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            daysWeatherDataTableView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            daysWeatherDataTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            daysWeatherDataTableView.topAnchor.constraint(equalTo: topAnchor)
         ])
     }
 }

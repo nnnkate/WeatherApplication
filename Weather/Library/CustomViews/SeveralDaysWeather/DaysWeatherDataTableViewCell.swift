@@ -15,7 +15,9 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
 
     static let id = "DaysWeatherDataTableViewCell"
     
-    var weakDayNameLabel: UILabel = {
+    // MARK: - Views
+    
+    private lazy var weakDayNameLabel: UILabel = {
         let weakDayNameLabel = UILabel()
         weakDayNameLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
         weakDayNameLabel.textColor = .black
@@ -33,7 +35,7 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
         return weatherConditionImage
     }()
     
-    var maxTemperatureLabel: UILabel = {
+    private lazy var maxTemperatureLabel: UILabel = {
         let maxTemperatureLabel = UILabel()
         maxTemperatureLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
         maxTemperatureLabel.textColor = .black
@@ -50,7 +52,7 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
         return separateImage
     }()
     
-    var minTemperatureLabel: UILabel = {
+    private lazy var minTemperatureLabel: UILabel = {
         let minTemperatureLabel = UILabel()
         minTemperatureLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
         minTemperatureLabel.textColor = .black
@@ -77,6 +79,8 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
         
         return horizontalStack
     }()
+    
+    // MARK: - Initialization
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -121,10 +125,10 @@ private extension DaysWeatherDataTableViewCell {
     func configureLayout() {
         mainHorizontalStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            mainHorizontalStack.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            mainHorizontalStack.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            mainHorizontalStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
-            mainHorizontalStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 5)
+            mainHorizontalStack.centerXAnchor.constraint(equalTo: centerXAnchor),
+            mainHorizontalStack.centerYAnchor.constraint(equalTo: centerYAnchor),
+            mainHorizontalStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            mainHorizontalStack.topAnchor.constraint(equalTo: topAnchor, constant: 5)
         ])
     }
 }
