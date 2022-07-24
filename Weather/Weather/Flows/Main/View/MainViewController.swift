@@ -174,7 +174,7 @@ private extension MainViewController {
             weatherCharactersView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             weatherCharactersView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
             weatherCharactersView.topAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: 20.VAdapted),
-            weatherCharactersView.heightAnchor.constraint(equalToConstant: 100.VAdapted)
+            weatherCharactersView.heightAnchor.constraint(equalToConstant: 140.VAdapted)
         ])
         
         severalDaysWeatherView.translatesAutoresizingMaskIntoConstraints = false

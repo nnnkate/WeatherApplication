@@ -12,10 +12,20 @@ final class WeatherCharacterView: UIView {
     
     // MARK: - Views
     
+    private lazy var frameImage: UIImageView = {
+        let frameImage = UIImageView()
+        frameImage.contentMode = .scaleAspectFit
+        frameImage.tintColor = .customDarkPurple
+        
+        frameImage.image = UIImage(systemName: "circle")
+
+        return frameImage
+    }()
+    
     private lazy var weatherCharacterImage: UIImageView = {
         let weatherCharacterImage = UIImageView()
         weatherCharacterImage.contentMode = .scaleAspectFit
-        weatherCharacterImage.tintColor = .black
+        weatherCharacterImage.tintColor = .customDarkPurple
         
         weatherCharacterImage.image = UIImage(systemName: "thermometer")
 
@@ -27,15 +37,15 @@ final class WeatherCharacterView: UIView {
         characterStack.axis = .vertical
         characterStack.distribution = .equalCentering
         characterStack.alignment = .center
-        characterStack.spacing = 5
+        characterStack.spacing = 2.VAdapted
         
         return characterStack
     }()
     
     private lazy var characterNameLabel: UILabel = {
         let characterNameLabel = UILabel()
-        characterNameLabel.font = .systemFont(ofSize: CGFloat(10).adaptedFontSize)
-        characterNameLabel.textColor = .black
+        characterNameLabel.font = .systemFont(ofSize: CGFloat(15).adaptedFontSize)
+        characterNameLabel.textColor = .customDarkPurple
         
         characterNameLabel.text = "Min temp"
         
@@ -44,8 +54,8 @@ final class WeatherCharacterView: UIView {
     
     private lazy var characterValueLabel: UILabel = {
         let characterValueLabel = UILabel()
-        characterValueLabel.font = .systemFont(ofSize: CGFloat(40).adaptedFontSize)
-        characterValueLabel.textColor = .black
+        characterValueLabel.font = .systemFont(ofSize: CGFloat(35).adaptedFontSize)
+        characterValueLabel.textColor = .customDarkPurple
         
         characterValueLabel.text = "20"
         
@@ -78,10 +88,12 @@ final class WeatherCharacterView: UIView {
 private extension WeatherCharacterView {
     private func setupApearance() {
         //self.backgroundColor = .yellow
+        //self.layer.opacity = 1
         
     }
     
     func addSubviews() {
+        addSubview(frameImage)
         addSubview(weatherCharacterImage)
         addSubview(characterStack)
         
@@ -90,20 +102,28 @@ private extension WeatherCharacterView {
     }
     
     func configureLayout() {
+        frameImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            frameImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5.HAdapted),
+            frameImage.centerYAnchor.constraint(equalTo: centerYAnchor),
+            frameImage.trailingAnchor.constraint(equalTo: centerXAnchor),
+            frameImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5.VAdapted)
+        ])
+        
         weatherCharacterImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            weatherCharacterImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            weatherCharacterImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-            weatherCharacterImage.heightAnchor.constraint(equalTo: weatherCharacterImage.widthAnchor),
-            weatherCharacterImage.bottomAnchor.constraint(equalTo: bottomAnchor)
+            weatherCharacterImage.leadingAnchor.constraint(equalTo: frameImage.leadingAnchor, constant: 10.HAdapted),
+            weatherCharacterImage.centerYAnchor.constraint(equalTo: frameImage.centerYAnchor),
+            weatherCharacterImage.centerXAnchor.constraint(equalTo: frameImage.centerXAnchor),
+            weatherCharacterImage.bottomAnchor.constraint(equalTo: frameImage.bottomAnchor, constant: -10.HAdapted)
         ])
         
         characterStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            characterStack.topAnchor.constraint(equalTo: topAnchor),
+            characterStack.topAnchor.constraint(equalTo: topAnchor, constant: 5.VAdapted),
             characterStack.leadingAnchor.constraint(equalTo: weatherCharacterImage.trailingAnchor, constant: 5.HAdapted),
-            characterStack.centerYAnchor.constraint(equalTo: centerYAnchor),
-            characterStack.bottomAnchor.constraint(equalTo: bottomAnchor)
+            characterStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5.HAdapted),
+            characterStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5.VAdapted)
         ])
     }
 }

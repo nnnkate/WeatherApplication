@@ -20,9 +20,7 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
     private lazy var weakDayNameLabel: UILabel = {
         let weakDayNameLabel = UILabel()
         weakDayNameLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
-        weakDayNameLabel.textColor = .black
-        
-        weakDayNameLabel.text = "Today"
+        weakDayNameLabel.textColor = .customDarkPurple
         
         return weakDayNameLabel
     }()
@@ -30,7 +28,7 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
     private lazy var weatherConditionImage: UIImageView = {
         let weatherConditionImage = UIImageView()
         weatherConditionImage.contentMode = .scaleAspectFit
-        weatherConditionImage.tintColor = .black
+        weatherConditionImage.tintColor = .customDarkPurple
         
         return weatherConditionImage
     }()
@@ -38,14 +36,14 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
     private lazy var maxTemperatureLabel: UILabel = {
         let maxTemperatureLabel = UILabel()
         maxTemperatureLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
-        maxTemperatureLabel.textColor = .black
+        maxTemperatureLabel.textColor = .customDarkPurple
         
         return maxTemperatureLabel
     }()
     
     private lazy var separateImage: UIImageView = {
         let separateImage = UIImageView()
-        separateImage.tintColor = .black
+        separateImage.tintColor = .customDarkPurple
         
         separateImage.image = UIImage(systemName: "minus")
         
@@ -55,7 +53,7 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
     private lazy var minTemperatureLabel: UILabel = {
         let minTemperatureLabel = UILabel()
         minTemperatureLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
-        minTemperatureLabel.textColor = .black
+        minTemperatureLabel.textColor = .customDarkPurple
         
         return minTemperatureLabel
     }()

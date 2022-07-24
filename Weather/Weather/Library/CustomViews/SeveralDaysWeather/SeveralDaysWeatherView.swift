@@ -19,16 +19,6 @@ final class SeveralDaysWeatherView: UIView {
     
     // MARK: - Views
     
-    private lazy var weakDayNameLabel: UILabel = {
-        let weakDayNameLabel = UILabel()
-        weakDayNameLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
-        weakDayNameLabel.textColor = .black
-        
-        weakDayNameLabel.text = "Today"
-        
-        return weakDayNameLabel
-    }()
-    
     private lazy var daysWeatherDataTableView: UITableView = {
         let daysWeatherDataTableView = UITableView()
         daysWeatherDataTableView.backgroundColor = .clear
@@ -67,10 +57,9 @@ final class SeveralDaysWeatherView: UIView {
 
 private extension SeveralDaysWeatherView {
     private func setupApearance() {
-        self.backgroundColor = .white
+        self.backgroundColor = .white.withAlphaComponent(0.3)
         self.addShadow(color: .white)
         self.layer.cornerRadius = 13.HAdapted
-        self.layer.opacity = 0.5
     }
     
     func addSubviews() {

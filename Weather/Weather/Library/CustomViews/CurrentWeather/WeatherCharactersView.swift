@@ -61,10 +61,9 @@ final class WeatherCharactersView: UIView {
 
 private extension WeatherCharactersView {
     private func setupApearance() {
-        self.backgroundColor = .white
+        self.backgroundColor = .white.withAlphaComponent(0.3)
         self.addShadow(color: .white)
         self.layer.cornerRadius = 13.HAdapted
-        self.layer.opacity = 0.5
     }
     
     func addSubviews() {
