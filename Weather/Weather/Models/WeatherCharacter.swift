@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 enum WeatherCharacter: String {
-    case temp
+    case minTemp
+    case maxTemp
     case windSpeed
     case humidity
 }
@@ -17,7 +18,10 @@ enum WeatherCharacter: String {
 extension WeatherCharacter {
     var image: UIImage? {
         switch self {
-        case .temp:
+        case .minTemp:
+            return UIImage(systemName: "thermometer")
+            
+        case .maxTemp:
             return UIImage(systemName: "thermometer")
             
         case .windSpeed:
@@ -25,6 +29,23 @@ extension WeatherCharacter {
             
         case .humidity:
             return UIImage(systemName: "humidity")
+
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .minTemp:
+            return "Min temp"
+            
+        case .maxTemp:
+            return "Min temp"
+            
+        case .windSpeed:
+            return "Wind speed"
+            
+        case .humidity:
+            return "Humidity"
 
         }
     }

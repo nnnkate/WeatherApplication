@@ -26,8 +26,6 @@ final class WeatherCharacterView: UIView {
         let weatherCharacterImage = UIImageView()
         weatherCharacterImage.contentMode = .scaleAspectFit
         weatherCharacterImage.tintColor = .customDarkPurple
-        
-        weatherCharacterImage.image = UIImage(systemName: "thermometer")
 
         return weatherCharacterImage
     }()
@@ -46,8 +44,6 @@ final class WeatherCharacterView: UIView {
         let characterNameLabel = UILabel()
         characterNameLabel.font = .systemFont(ofSize: CGFloat(15).adaptedFontSize)
         characterNameLabel.textColor = .customDarkPurple
-        
-        characterNameLabel.text = "Min temp"
         
         return characterNameLabel
     }()
@@ -91,6 +87,7 @@ private extension WeatherCharacterView {
         //self.layer.opacity = 1
         
         weatherCharacterImage.image = character.image
+        characterNameLabel.text = character.title
         
     }
     
