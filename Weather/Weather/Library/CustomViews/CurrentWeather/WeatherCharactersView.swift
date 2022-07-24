@@ -13,25 +13,25 @@ final class WeatherCharactersView: UIView {
     // MARK: - Views
     
     private lazy var minTemperatureView: WeatherCharacterView = {
-        let minTemperatureView = WeatherCharacterView()
+        let minTemperatureView = WeatherCharacterView(character: .temp)
         
         return minTemperatureView
     }()
     
     private lazy var maxTemperatureView: WeatherCharacterView = {
-        let maxTemperatureView = WeatherCharacterView()
+        let maxTemperatureView = WeatherCharacterView(character: .temp)
         
         return maxTemperatureView
     }()
     
     private lazy var windSpeedView: WeatherCharacterView = {
-        let windSpeedView = WeatherCharacterView()
+        let windSpeedView = WeatherCharacterView(character: .windSpeed)
         
         return windSpeedView
     }()
     
     private lazy var humidityView: WeatherCharacterView = {
-        let humidityView = WeatherCharacterView()
+        let humidityView = WeatherCharacterView(character: .humidity)
         
         return humidityView
     }()

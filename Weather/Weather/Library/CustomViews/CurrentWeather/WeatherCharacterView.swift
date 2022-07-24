@@ -64,10 +64,10 @@ final class WeatherCharacterView: UIView {
     
     // MARK: - Initialization
     
-    init() {
+    init(character: WeatherCharacter) {
         super.init(frame: .zero)
         
-        setupApearance()
+        setupApearance(character: character)
         addSubviews()
         configureLayout()
     }
@@ -86,9 +86,11 @@ final class WeatherCharacterView: UIView {
 // MARK: - Appearance Methods
 
 private extension WeatherCharacterView {
-    private func setupApearance() {
+    private func setupApearance(character: WeatherCharacter) {
         //self.backgroundColor = .yellow
         //self.layer.opacity = 1
+        
+        weatherCharacterImage.image = character.image
         
     }
     
@@ -112,16 +114,16 @@ private extension WeatherCharacterView {
         
         weatherCharacterImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            weatherCharacterImage.leadingAnchor.constraint(equalTo: frameImage.leadingAnchor, constant: 10.HAdapted),
+            weatherCharacterImage.leadingAnchor.constraint(equalTo: frameImage.leadingAnchor, constant: 15.HAdapted),
             weatherCharacterImage.centerYAnchor.constraint(equalTo: frameImage.centerYAnchor),
             weatherCharacterImage.centerXAnchor.constraint(equalTo: frameImage.centerXAnchor),
-            weatherCharacterImage.bottomAnchor.constraint(equalTo: frameImage.bottomAnchor, constant: -10.HAdapted)
+            weatherCharacterImage.bottomAnchor.constraint(equalTo: frameImage.bottomAnchor, constant: -15.HAdapted)
         ])
         
         characterStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             characterStack.topAnchor.constraint(equalTo: topAnchor, constant: 5.VAdapted),
-            characterStack.leadingAnchor.constraint(equalTo: weatherCharacterImage.trailingAnchor, constant: 5.HAdapted),
+            characterStack.leadingAnchor.constraint(equalTo: weatherCharacterImage.trailingAnchor, constant: 2.HAdapted),
             characterStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5.HAdapted),
             characterStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5.VAdapted)
         ])
