@@ -15,10 +15,17 @@ protocol ModuleBuilderProtocol {
 class ModuleBuilder: ModuleBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController {
         let view = MainViewController()
-        let networkService = NetworkService()
-        let presenter = MainViewPresenter(view: view, router: router, networkService: networkService)
+        let presenter = MainViewPresenter(view: view, router: router)
         view.presenter = presenter
         
+        return view
+    }
+    
+    func createSearchModule(router: RouterProtocol) -> UIViewController {
+        let view = SearchViewController()
+        let presenter = SearchViewPresenter(view: view, router: router)
+        view.presenter = presenter
+
         return view
     }
 }

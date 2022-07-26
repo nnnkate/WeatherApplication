@@ -8,25 +8,57 @@
 import Foundation
 import CoreLocation
 
+protocol LocationManagerDelegate: AnyObject {
+    func locationDidUpdate(_ location: CLLocation?)
+}
+
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
-    private let manager = CLLocationManager()
-    private(set) var location: CLLocation?
+    private lazy var manager: CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.delegate = self
+        
+        return manager
+        
+    }()
+    private(set) var location: CLLocation? {
+        didSet {
+            delegate?.locationDidUpdate(location)
+        }
+    }
+    
+    weak var delegate: LocationManagerDelegate?
     
     override init() {
         super.init()
-        manager.delegate = self
         
         manager.requestAlwaysAuthorization()
+        requestLocationOrPermission()
+    }
+    
+    func requestLocationOrPermission() {
+        if manager.authorizationStatus == .authorizedAlways || manager.authorizationStatus == .authorizedWhenInUse {
+            manager.requestLocation()
+            
+            return
+        }
+        
+        requestPermission()
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedAlways {
-            if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
-                if CLLocationManager.isRangingAvailable() {
-                    location = manager.location
-                }
-            }
-        }
+        requestLocationOrPermission()
+    }
+    
+    func requestPermission() {
+        manager.requestWhenInUseAuthorization()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        location = locations.last
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
     }
 }

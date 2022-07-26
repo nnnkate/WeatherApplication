@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol MainViewProtocol: AnyObject {
     func updateCurrentWeather(_ data: CurrentWeatherResponse)
@@ -27,13 +28,18 @@ class MainViewPresenter {
     // MARK: - Private properties
     
     private var router: RouterProtocol?
-    private let networkService: NetworkServiceProtocol
     
-    private let locationManager = LocationManager()
+    private lazy var locationManager: LocationManager = {
+        let locationManager = LocationManager()
+        locationManager.delegate = self
+        
+        return locationManager
+    }()
+    
+    // MARK: - Initialization
 
-    required init(view: MainViewProtocol, router: RouterProtocol, networkService: NetworkServiceProtocol) {
+    required init(view: MainViewProtocol, router: RouterProtocol) {
         self.view = view
-        self.networkService = networkService
         self.router = router
     }
 }
@@ -43,7 +49,7 @@ class MainViewPresenter {
 extension MainViewPresenter: MainViewPresenterProtocol {
     func getCurrentWeather() {
         guard let location = locationManager.location else { return }
-        networkService.getCurrentWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { [weak self] data, error in
+        router?.networkService.getCurrentWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { [weak self] data, error in
             guard let weatherResponse = data else { return }
             self?.view?.updateCurrentWeather(weatherResponse)
             
@@ -55,7 +61,7 @@ extension MainViewPresenter: MainViewPresenterProtocol {
     
     func getSeveralDaysWeather() {
         guard let location = locationManager.location else { return }
-        networkService.getSeveralDaysWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { [weak self] data, error in
+        router?.networkService.getSeveralDaysWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { [weak self] data, error in
             guard let weatherResponse = data else { return }
             self?.view?.updateSeveralDaysWeather(weatherResponse)
             
@@ -66,6 +72,15 @@ extension MainViewPresenter: MainViewPresenterProtocol {
     }
     
     func getTimestampsNumber() -> Int {
-        networkService.timestampsNumber
+        router?.networkService.timestampsNumber ?? 0
+    }
+}
+
+// MARK: - LocationManagerDelegate
+
+extension MainViewPresenter: LocationManagerDelegate {
+    func locationDidUpdate(_ location: CLLocation?) {
+        getCurrentWeather()
+        getSeveralDaysWeather()
     }
 }

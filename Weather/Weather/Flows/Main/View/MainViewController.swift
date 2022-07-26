@@ -90,8 +90,7 @@ class MainViewController: UIViewController {
         addSubviews()
         configureLayout()
         
-        presenter.getCurrentWeather()
-        presenter.getSeveralDaysWeather()
+        getWeatherData()
     }
 }
 
@@ -211,6 +210,15 @@ extension MainViewController: MainViewProtocol {
 private extension MainViewController {
     func handleRightBarButtonItem() {
         print("+")
+    }
+}
+
+// MARK: - WeatherData
+
+private extension MainViewController {
+    func getWeatherData() {
+        presenter.getCurrentWeather()
+        presenter.getSeveralDaysWeather()
     }
 }
 
