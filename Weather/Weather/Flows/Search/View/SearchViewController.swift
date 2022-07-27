@@ -11,7 +11,6 @@ class SearchViewController: UIViewController {
     
     var presenter: SearchViewPresenterProtocol!
     
-    
     // MARK: - UIViewController
 
     override func viewDidLoad() {

@@ -36,16 +36,16 @@ extension WeatherCharacter {
     var title: String {
         switch self {
         case .minTemp:
-            return "Min temp"
+            return NSLocalizedString("minTemp", comment: "")
             
         case .maxTemp:
-            return "Min temp"
+            return NSLocalizedString("maxTemp", comment: "")
             
         case .windSpeed:
-            return "Wind speed"
+            return NSLocalizedString("windSpeed", comment: "")
             
         case .humidity:
-            return "Humidity"
+            return NSLocalizedString("humidity", comment: "")
 
         }
     }

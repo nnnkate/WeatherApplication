@@ -192,7 +192,8 @@ extension MainViewController: MainViewProtocol {
     func updateCurrentWeather(_ data: CurrentWeatherResponse) {
         print(data) // temporary
         cityNameLabel.text = data.name
-        currentDateLabel.text = "Today, \(Date().formatted(.dateTime.month().day().hour().minute()))"
+        let today = NSLocalizedString("today", comment: "")
+        currentDateLabel.text = "\(today), \(Date().formatted(.dateTime.month().day().hour().minute()))"
         currentTemperatureLabel.text = "\(Int(data.main.feelsLike))°"
         
         guard let weatherCondition = WeatherCondition(id: data.weather.first?.id ?? 0) else { return }
