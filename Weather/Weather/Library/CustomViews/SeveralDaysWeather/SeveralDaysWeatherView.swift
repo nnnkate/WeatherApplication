@@ -61,7 +61,7 @@ private extension SeveralDaysWeatherView {
     private func setupApearance() {
         self.backgroundColor = .white.withAlphaComponent(0.3)
         self.addShadow(color: .white)
-        self.layer.cornerRadius = 13.HAdapted
+        self.layer.cornerRadius = 13
     }
     
     func addSubviews() {

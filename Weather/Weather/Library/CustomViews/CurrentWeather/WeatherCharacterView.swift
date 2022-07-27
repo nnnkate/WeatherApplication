@@ -35,14 +35,14 @@ final class WeatherCharacterView: UIView {
         characterStack.axis = .vertical
         characterStack.distribution = .equalCentering
         characterStack.alignment = .center
-        characterStack.spacing = 2.VAdapted
+        characterStack.spacing = 2
         
         return characterStack
     }()
     
     private lazy var characterNameLabel: UILabel = {
         let characterNameLabel = UILabel()
-        characterNameLabel.font = .systemFont(ofSize: CGFloat(15).adaptedFontSize)
+        characterNameLabel.font = .systemFont(ofSize: 15)
         characterNameLabel.textColor = .customDarkPurple
         characterNameLabel.adjustsFontSizeToFitWidth = true
         
@@ -51,7 +51,7 @@ final class WeatherCharacterView: UIView {
     
     private lazy var characterValueLabel: UILabel = {
         let characterValueLabel = UILabel()
-        characterValueLabel.font = .systemFont(ofSize: CGFloat(35).adaptedFontSize)
+        characterValueLabel.font = .systemFont(ofSize: 35)
         characterValueLabel.textColor = .customDarkPurple
         characterValueLabel.adjustsFontSizeToFitWidth = true
         
@@ -101,26 +101,26 @@ private extension WeatherCharacterView {
     func configureLayout() {
         frameImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            frameImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5.HAdapted),
+            frameImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             frameImage.centerYAnchor.constraint(equalTo: centerYAnchor),
             frameImage.trailingAnchor.constraint(equalTo: centerXAnchor),
-            frameImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5.VAdapted)
+            frameImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         ])
         
         weatherCharacterImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            weatherCharacterImage.leadingAnchor.constraint(equalTo: frameImage.leadingAnchor, constant: 15.HAdapted),
+            weatherCharacterImage.leadingAnchor.constraint(equalTo: frameImage.leadingAnchor, constant: 15),
             weatherCharacterImage.centerYAnchor.constraint(equalTo: frameImage.centerYAnchor),
             weatherCharacterImage.centerXAnchor.constraint(equalTo: frameImage.centerXAnchor),
-            weatherCharacterImage.bottomAnchor.constraint(equalTo: frameImage.bottomAnchor, constant: -15.HAdapted)
+            weatherCharacterImage.bottomAnchor.constraint(equalTo: frameImage.bottomAnchor, constant: -15)
         ])
         
         characterStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            characterStack.topAnchor.constraint(equalTo: topAnchor, constant: 5.VAdapted),
-            characterStack.leadingAnchor.constraint(equalTo: weatherCharacterImage.trailingAnchor, constant: 2.HAdapted),
-            characterStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5.HAdapted),
-            characterStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5.VAdapted)
+            characterStack.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            characterStack.leadingAnchor.constraint(equalTo: weatherCharacterImage.trailingAnchor, constant: 2),
+            characterStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            characterStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         ])
     }
 }

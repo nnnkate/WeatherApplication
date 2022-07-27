@@ -11,6 +11,14 @@ class SearchViewController: UIViewController {
     
     var presenter: SearchViewPresenterProtocol!
     
+    // MARK: - Views
+    
+    private lazy var searchTextField: UITextField = {
+        let searchTextField = UITextField()
+        
+        return searchTextField
+    }()
+    
     // MARK: - UIViewController
 
     override func viewDidLoad() {
