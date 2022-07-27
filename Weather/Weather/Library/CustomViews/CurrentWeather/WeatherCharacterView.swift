@@ -44,6 +44,7 @@ final class WeatherCharacterView: UIView {
         let characterNameLabel = UILabel()
         characterNameLabel.font = .systemFont(ofSize: CGFloat(15).adaptedFontSize)
         characterNameLabel.textColor = .customDarkPurple
+        characterNameLabel.adjustsFontSizeToFitWidth = true
         
         return characterNameLabel
     }()
@@ -52,6 +53,7 @@ final class WeatherCharacterView: UIView {
         let characterValueLabel = UILabel()
         characterValueLabel.font = .systemFont(ofSize: CGFloat(35).adaptedFontSize)
         characterValueLabel.textColor = .customDarkPurple
+        characterValueLabel.adjustsFontSizeToFitWidth = true
         
         characterValueLabel.text = "20"
         

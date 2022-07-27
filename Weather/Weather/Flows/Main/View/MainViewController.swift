@@ -13,9 +13,41 @@ class MainViewController: UIViewController {
     
     // MARK: - Private properties
     
+    private var currentWeatherDataIsLoaded: Bool = false {
+        didSet {
+            if currentWeatherDataIsLoaded, severalDaysWeatherDataIsLoaded {
+                spinnerView.removeFromSuperview()
+            }
+        }
+    }
+    
+    private var severalDaysWeatherDataIsLoaded: Bool = false {
+        didSet {
+            if currentWeatherDataIsLoaded, severalDaysWeatherDataIsLoaded {
+                spinnerView.removeFromSuperview()
+            }
+        }
+    }
+    
     private lazy var severalDaysWeatherViewHeight = CGFloat(presenter.getTimestampsNumber()) * 50
     
     // MARK: - Views
+    
+    private lazy var spinnerView: UIView = {
+        let spinnerView = UIView()
+        spinnerView.backgroundColor = .customPurple
+        
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinnerView.addSubview(spinner)
+        
+        spinner.startAnimating()
+        
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.centerXAnchor.constraint(equalTo: spinnerView.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: spinnerView.centerYAnchor).isActive = true
+        
+        return spinnerView
+    }()
     
     private lazy var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(image: UIImage(named: "city"))
@@ -125,6 +157,8 @@ private extension MainViewController {
         
         view.addSubview(weatherCharactersView)
         view.addSubview(severalDaysWeatherView)
+        
+        view.addSubview(spinnerView)
     }
     
     func configureLayout() {
@@ -183,6 +217,14 @@ private extension MainViewController {
             severalDaysWeatherView.topAnchor.constraint(equalTo: weatherCharactersView.bottomAnchor, constant: 20.VAdapted),
             severalDaysWeatherView.heightAnchor.constraint(equalToConstant: Int(severalDaysWeatherViewHeight).VAdapted)
         ])
+        
+        spinnerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            spinnerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            spinnerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            spinnerView.topAnchor.constraint(equalTo: view.topAnchor),
+            spinnerView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        ])
     }
 }
 
@@ -198,11 +240,15 @@ extension MainViewController: MainViewProtocol {
         
         guard let weatherCondition = WeatherCondition(id: data.weather.first?.id ?? 0) else { return }
         self.weatherConditionImage.image = weatherCondition.image
+        
+        currentWeatherDataIsLoaded = true
     }
     
     func updateSeveralDaysWeather(_ data: SeveralDaysWeather) {
         print(data) // temporary
         severalDaysWeatherView.updateView(with: data)
+        
+        severalDaysWeatherDataIsLoaded = true
     }
 }
 
