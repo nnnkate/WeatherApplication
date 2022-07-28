@@ -57,7 +57,8 @@ private extension SceneDelegate {
         let navigationController = UINavigationController()
         let moduleBuilder = ModuleBuilder()
         let networkService = NetworkService()
-        let router = Router(navigationController: navigationController, builder: moduleBuilder, networkService: networkService)
+        let coreDataManager = CoreDataManager()
+        let router = Router(navigationController: navigationController, builder: moduleBuilder, networkService: networkService, coreDataManager: coreDataManager)
         router.initialViewController()
         
         window.rootViewController = navigationController

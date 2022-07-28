@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import UIKit
 import CoreLocation
+import CoreData
 
 protocol MainViewProtocol: AnyObject {
     func updateCurrentWeather(_ data: CurrentWeatherResponse)
@@ -56,6 +58,7 @@ extension MainViewPresenter: MainViewPresenterProtocol {
         guard let location = locationManager.location else { return }
         router?.networkService.getCurrentWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { [weak self] data, error in
             guard let weatherResponse = data else { return }
+            self?.saveCurrentWeatherInformation(weatherResponse)
             self?.view?.updateCurrentWeather(weatherResponse)
             
             if let error = error {
@@ -87,5 +90,39 @@ extension MainViewPresenter: LocationManagerDelegate {
     func locationDidUpdate(_ location: CLLocation?) {
         getCurrentWeather()
         getSeveralDaysWeather()
+    }
+}
+
+// MARK: - CoreData
+
+private extension MainViewPresenter {
+    func saveCurrentWeatherInformation(_ data: CurrentWeatherResponse) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let location = Location(context: context)
+        location.name = data.name
+        location.longitude =  data.coord.lon
+        location.latitude =  data.coord.lat
+        
+        do {
+            try context.save()
+        } catch {
+            print(error)
+        }
+        //
+        
+        //
+        
+//        let fetchRequest = Location.fetchRequest() as NSFetchRequest<Location>
+//
+//        do {
+//            let location = try context.fetch(fetchRequest)
+//            print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+//            print(location)
+//        } catch let error {
+//            print(error)
+//        }
+       
+        //
     }
 }

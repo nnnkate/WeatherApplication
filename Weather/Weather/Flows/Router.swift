@@ -9,9 +9,10 @@ import Foundation
 import UIKit
 
 protocol RouterMain {
-    var navigationController: UINavigationController? { get set }
-    var builder: ModuleBuilder? { get set }
+    var navigationController: UINavigationController? { get }
+    var builder: ModuleBuilder? { get }
     var networkService: NetworkServiceProtocol { get }
+    var coreDataManager: CoreDataManager { get }
 }
 
 protocol RouterProtocol: RouterMain {
@@ -20,14 +21,16 @@ protocol RouterProtocol: RouterMain {
 }
 
 class Router: RouterProtocol {
-    var navigationController: UINavigationController?
-    var builder: ModuleBuilder?
-    var networkService: NetworkServiceProtocol
+    private(set) var navigationController: UINavigationController?
+    private(set) var builder: ModuleBuilder?
+    private(set) var networkService: NetworkServiceProtocol
+    private(set) var coreDataManager: CoreDataManager
     
-    init(navigationController: UINavigationController, builder: ModuleBuilder, networkService: NetworkServiceProtocol) {
+    init(navigationController: UINavigationController, builder: ModuleBuilder, networkService: NetworkServiceProtocol, coreDataManager: CoreDataManager) {
         self.navigationController = navigationController
         self.builder = builder
         self.networkService = networkService
+        self.coreDataManager = coreDataManager
     }
     
     func initialViewController() {
