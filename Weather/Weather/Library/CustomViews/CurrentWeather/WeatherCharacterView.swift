@@ -18,6 +18,7 @@ final class WeatherCharacterView: UIView {
         let frameImage = UIImageView()
         frameImage.contentMode = .scaleAspectFit
         frameImage.tintColor = .customDarkPurple
+        frameImage.alpha = 0.6
         
         frameImage.image = UIImage(systemName: "circle")
 
@@ -28,7 +29,8 @@ final class WeatherCharacterView: UIView {
         let weatherCharacterImage = UIImageView()
         weatherCharacterImage.contentMode = .scaleAspectFit
         weatherCharacterImage.tintColor = .customDarkPurple
-
+        weatherCharacterImage.alpha = 0.8
+        
         return weatherCharacterImage
     }()
     
