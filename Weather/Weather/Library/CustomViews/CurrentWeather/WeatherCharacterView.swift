@@ -33,8 +33,8 @@ final class WeatherCharacterView: UIView {
     private let characterStack: UIStackView = {
         let characterStack = UIStackView()
         characterStack.axis = .vertical
-        characterStack.distribution = .equalCentering
-        characterStack.alignment = .center
+        characterStack.distribution = .fillProportionally
+        characterStack.alignment = .leading
         characterStack.spacing = 2
         
         return characterStack
@@ -42,7 +42,7 @@ final class WeatherCharacterView: UIView {
     
     private lazy var characterNameLabel: UILabel = {
         let characterNameLabel = UILabel()
-        characterNameLabel.font = .systemFont(ofSize: 15)
+        characterNameLabel.font = .systemFont(ofSize: CGFloat(10).adaptedFontSize())
         characterNameLabel.textColor = .customDarkPurple
         characterNameLabel.adjustsFontSizeToFitWidth = true
         
@@ -51,9 +51,10 @@ final class WeatherCharacterView: UIView {
     
     private lazy var characterValueLabel: UILabel = {
         let characterValueLabel = UILabel()
-        characterValueLabel.font = .systemFont(ofSize: 35)
+        characterValueLabel.font = .systemFont(ofSize: CGFloat(35).adaptedFontSize())
         characterValueLabel.textColor = .customDarkPurple
         characterValueLabel.adjustsFontSizeToFitWidth = true
+        characterValueLabel.textAlignment = .center
         
         characterValueLabel.text = "20"
         
@@ -101,26 +102,27 @@ private extension WeatherCharacterView {
     func configureLayout() {
         frameImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            frameImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            frameImage.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 0.003),
             frameImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-            frameImage.trailingAnchor.constraint(equalTo: centerXAnchor),
-            frameImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
+            frameImage.widthAnchor.constraint(equalTo: frameImage.heightAnchor),
+            frameImage.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: 0.003)
         ])
         
         weatherCharacterImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            weatherCharacterImage.leadingAnchor.constraint(equalTo: frameImage.leadingAnchor, constant: 15),
+            weatherCharacterImage.leadingAnchor.constraint(equalToSystemSpacingAfter: frameImage.leadingAnchor, multiplier: 1.3),
             weatherCharacterImage.centerYAnchor.constraint(equalTo: frameImage.centerYAnchor),
             weatherCharacterImage.centerXAnchor.constraint(equalTo: frameImage.centerXAnchor),
-            weatherCharacterImage.bottomAnchor.constraint(equalTo: frameImage.bottomAnchor, constant: -15)
+            weatherCharacterImage.topAnchor.constraint(equalToSystemSpacingBelow: frameImage.topAnchor, multiplier: 1.3)
         ])
         
         characterStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            characterStack.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            characterStack.leadingAnchor.constraint(equalTo: weatherCharacterImage.trailingAnchor, constant: 2),
-            characterStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-            characterStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
+            characterStack.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 0.003),
+            characterStack.leadingAnchor.constraint(equalToSystemSpacingAfter: weatherCharacterImage.trailingAnchor, multiplier: 1),
+            characterStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            characterStack.trailingAnchor.constraint(equalToSystemSpacingAfter: trailingAnchor, multiplier: 0),
+            characterStack.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: 0.003)
         ])
     }
 }
