@@ -10,6 +10,8 @@ import UIKit
 
 final class WeatherCharacterView: UIView {
     
+    private var character: WeatherCharacter!
+    
     // MARK: - Views
     
     private lazy var frameImage: UIImageView = {
@@ -42,21 +44,21 @@ final class WeatherCharacterView: UIView {
     
     private lazy var characterNameLabel: UILabel = {
         let characterNameLabel = UILabel()
-        characterNameLabel.font = .systemFont(ofSize: CGFloat(10).adaptedFontSize())
+        characterNameLabel.font = .systemFont(ofSize: CGFloat(5).adaptedFontSize())
         characterNameLabel.textColor = .customDarkPurple
         characterNameLabel.adjustsFontSizeToFitWidth = true
+        characterNameLabel.minimumScaleFactor = 0.5
         
         return characterNameLabel
     }()
     
     private lazy var characterValueLabel: UILabel = {
         let characterValueLabel = UILabel()
-        characterValueLabel.font = .systemFont(ofSize: CGFloat(35).adaptedFontSize())
+        characterValueLabel.font = .systemFont(ofSize: CGFloat(12).adaptedFontSize())
         characterValueLabel.textColor = .customDarkPurple
         characterValueLabel.adjustsFontSizeToFitWidth = true
+        characterValueLabel.minimumScaleFactor = 0.5
         characterValueLabel.textAlignment = .center
-        
-        characterValueLabel.text = "20"
         
         return characterValueLabel
     }()
@@ -66,7 +68,9 @@ final class WeatherCharacterView: UIView {
     init(character: WeatherCharacter) {
         super.init(frame: .zero)
         
-        setupApearance(character: character)
+        self.character = character
+        
+        setupApearance()
         addSubviews()
         configureLayout()
     }
@@ -77,15 +81,15 @@ final class WeatherCharacterView: UIView {
     
     // MARK: - Public Methods
     
-    func updateView() {
-        
+    func updateView(with value: Double) {
+        characterValueLabel.text = String(value) + character.unit
     }
 }
 
 // MARK: - Appearance Methods
 
 private extension WeatherCharacterView {
-    private func setupApearance(character: WeatherCharacter) {
+    private func setupApearance() {
         weatherCharacterImage.image = character.image
         characterNameLabel.text = character.title
     }
@@ -102,24 +106,24 @@ private extension WeatherCharacterView {
     func configureLayout() {
         frameImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            frameImage.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 0.003),
+            frameImage.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
             frameImage.centerYAnchor.constraint(equalTo: centerYAnchor),
             frameImage.widthAnchor.constraint(equalTo: frameImage.heightAnchor),
-            frameImage.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: 0.003)
+            frameImage.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: -3)
         ])
         
         weatherCharacterImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            weatherCharacterImage.leadingAnchor.constraint(equalToSystemSpacingAfter: frameImage.leadingAnchor, multiplier: 1.3),
+            weatherCharacterImage.leadingAnchor.constraint(equalToSystemSpacingAfter: frameImage.leadingAnchor, multiplier: 2),
             weatherCharacterImage.centerYAnchor.constraint(equalTo: frameImage.centerYAnchor),
             weatherCharacterImage.centerXAnchor.constraint(equalTo: frameImage.centerXAnchor),
-            weatherCharacterImage.topAnchor.constraint(equalToSystemSpacingBelow: frameImage.topAnchor, multiplier: 1.3)
+            weatherCharacterImage.topAnchor.constraint(equalToSystemSpacingBelow: frameImage.topAnchor, multiplier: 2)
         ])
         
         characterStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             characterStack.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 0.003),
-            characterStack.leadingAnchor.constraint(equalToSystemSpacingAfter: weatherCharacterImage.trailingAnchor, multiplier: 1),
+            characterStack.leadingAnchor.constraint(equalToSystemSpacingAfter: frameImage.trailingAnchor, multiplier: 1),
             characterStack.trailingAnchor.constraint(equalTo: trailingAnchor),
             characterStack.trailingAnchor.constraint(equalToSystemSpacingAfter: trailingAnchor, multiplier: 0),
             characterStack.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: 0.003)

@@ -52,8 +52,11 @@ final class WeatherCharactersView: UIView {
     
     // MARK: - Public Methods
     
-    func updateView() {
-        
+    func updateView(with data: CurrentWeatherResponse) {
+        minTemperatureView.updateView(with: data.main.tempMin)
+        maxTemperatureView.updateView(with: data.main.tempMax)
+        windSpeedView.updateView(with: data.wind.speed)
+        humidityView.updateView(with: data.main.humidity)
     }
 }
 

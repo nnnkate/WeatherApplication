@@ -240,6 +240,8 @@ extension MainViewController: MainViewProtocol {
         guard let weatherCondition = WeatherCondition(id: data.weather.first?.id ?? 0) else { return }
         self.weatherConditionImage.image = weatherCondition.image
         
+        weatherCharactersView.updateView(with: data)
+        
         currentWeatherDataIsLoaded = true
     }
     
