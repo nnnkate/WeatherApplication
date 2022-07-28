@@ -13,4 +13,6 @@
 "windSpeed" = "Wind speed";
 "humidity" = "Humidity";
 
+"searchBarPlaceholder" = "Search for a city";
+
 
