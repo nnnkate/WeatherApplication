@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  Weather
+
+  Created by Ekaterina Nedelko on 27.07.22.
+  
+*/
+
+"today" = "Сегодня";
+
+"minTemp" = "Мин. температура";
+"maxTemp" = "Макс. температура";
+"windSpeed" = "Скорость ветра";
+"humidity" = "Влажность";

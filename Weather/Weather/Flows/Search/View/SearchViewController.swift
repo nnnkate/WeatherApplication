@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SearchViewController: UIViewController {
     
@@ -17,6 +18,20 @@ class SearchViewController: UIViewController {
         let searchTextField = SearchTextField()
        
         return searchTextField
+    }()
+    
+    lazy var cityWeatherTableView: UITableView = {
+        let cityWeatherTableView = UITableView()
+        
+        cityWeatherTableView.delegate = self
+        cityWeatherTableView.dataSource = self
+        
+        cityWeatherTableView.register(CityWeatherTableViewCell.classForCoder(),
+                        forCellReuseIdentifier: CityWeatherTableViewCell.id)
+        
+        cityWeatherTableView.backgroundColor = .clear
+    
+        return cityWeatherTableView
     }()
     
     // MARK: - UIViewController
@@ -40,15 +55,24 @@ private extension SearchViewController {
     
     func addSubviews() {
         view.addSubview(searchTextField)
+        view.addSubview(cityWeatherTableView)
     }
     
     func configureLayout() {
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            searchTextField.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
+            searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10.horizontalAdapted),
             searchTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05)
+        ])
+        
+        cityWeatherTableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cityWeatherTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10.horizontalAdapted),
+            cityWeatherTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            cityWeatherTableView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 5.verticalAdapted),
+            cityWeatherTableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7)
         ])
     }
 }
@@ -58,3 +82,12 @@ private extension SearchViewController {
 extension SearchViewController: SearchViewProtocol {
     
 }
+
+// MARK: - WeatherData
+
+private extension SearchViewController {
+    func getWeatherData() {
+       // presenter.getWeatherInformation()
+    }
+}
+

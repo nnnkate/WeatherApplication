@@ -6,17 +6,13 @@
 //
 
 import Foundation
-import UIKit
-import CoreLocation
-import CoreData
 
 protocol SearchViewProtocol: AnyObject {
     
 }
 
 protocol SearchViewPresenterProtocol: AnyObject {
-    var cities: [City] { get }
-   // func getWeatherInformation() -> [City]
+    
 }
 
 class SearchViewPresenter {
@@ -24,7 +20,6 @@ class SearchViewPresenter {
     // MARK: - Public properties
     
     weak var view: SearchViewProtocol?
-    private(set) var cities = [City]()
     
     // MARK: - Private properties
     
@@ -35,12 +30,6 @@ class SearchViewPresenter {
     required init(view: SearchViewProtocol, router: RouterProtocol) {
         self.view = view
         self.router = router
-        
-        self.cities = getWeatherInformation()
-    }
-    
-    func getWeatherInformation() -> [City] {
-        self.router?.citiesManager.cities ?? [City]()
     }
 }
 
@@ -49,6 +38,4 @@ class SearchViewPresenter {
 extension SearchViewPresenter: SearchViewPresenterProtocol {
     
 }
-
-
     
