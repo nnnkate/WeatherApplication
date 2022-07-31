@@ -42,6 +42,8 @@ class SearchViewController: UIViewController {
         setupAppearance()
         addSubviews()
         configureLayout()
+        
+        getWeatherData() 
     }
 }
 
@@ -80,14 +82,17 @@ private extension SearchViewController {
 // MARK: - MainViewProtocol
 
 extension SearchViewController: SearchViewProtocol {
-    
+    func updateView(_ citiesData: [Data]) {
+        cityWeatherTableView.reloadData()
+    }
 }
 
 // MARK: - WeatherData
 
 private extension SearchViewController {
     func getWeatherData() {
-       // presenter.getWeatherInformation()
+        let a = presenter.getWeatherInformation()
+        print(a)
     }
 }
 

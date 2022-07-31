@@ -20,7 +20,7 @@ extension SearchViewController: UITableViewDelegate {
 
 extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.cities.count
+        return presenter.citiesData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -28,10 +28,10 @@ extension SearchViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-//        let file = manager.filesData[indexPath.row]
-//        filesTableViewCell.updateData(file: file, selected: manager.selectedFiles.contains(file))
-//
-//        filesTableViewCell.selectionStyle = .none
+        let cityData = presenter.citiesData[indexPath.row]
+        cityWeatherTableViewCell.updateData(cityData)
+
+        cityWeatherTableViewCell.selectionStyle = .none
         
         return cityWeatherTableViewCell
     }

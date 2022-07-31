@@ -32,8 +32,6 @@ class CityWeatherTableViewCell: UITableViewCell {
         cityNameLabel.adjustsFontSizeToFitWidth = true
         cityNameLabel.minimumScaleFactor = 0.5
         
-        cityNameLabel.text = "Minsk"
-        
         return cityNameLabel
     }()
 
@@ -71,8 +69,8 @@ class CityWeatherTableViewCell: UITableViewCell {
         configureLayout()
     }
     
-    func updateData() {
-        
+    func updateData(_ data: City) {
+        cityNameLabel.text = data.name
     }
     
 }
@@ -110,7 +108,7 @@ private extension CityWeatherTableViewCell {
         cityWeatherConditionImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             cityWeatherConditionImage.heightAnchor.constraint(equalTo: cityWeatherLayerView.heightAnchor, multiplier: 0.5),
-            cityWeatherConditionImage.centerYAnchor.constraint(equalTo: cityWeatherLayerView.centerYAnchor),
+            cityWeatherConditionImage.widthAnchor.constraint(equalTo: cityWeatherConditionImage.heightAnchor),
             cityWeatherConditionImage.trailingAnchor.constraint(equalTo: cityWeatherLayerView.trailingAnchor, constant: -5.verticalAdapted),
             cityWeatherConditionImage.topAnchor.constraint(equalTo: cityWeatherLayerView.topAnchor, constant: 5.verticalAdapted)
         ])

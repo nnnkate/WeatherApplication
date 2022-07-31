@@ -31,10 +31,15 @@ final class CoreDataManager {
 
     private init () { }
     
-    func saveContext() {
-        if self.persistentContainer.viewContext.hasChanges {
+    func saveContext(_ data: CurrentWeatherResponse) {
+        let city = City(context: viewContext)
+        city.name = data.name
+        city.longitude =  data.coord.lon
+        city.latitude =  data.coord.lat
+     
+        if viewContext.hasChanges {
             do {
-                try self.persistentContainer.viewContext.save()
+                try viewContext.save()
             } catch {
                 NSLog("Error occured while saving persistent store: \(error), \(String(describing: error._userInfo))")
                 self.errorHandler(error)

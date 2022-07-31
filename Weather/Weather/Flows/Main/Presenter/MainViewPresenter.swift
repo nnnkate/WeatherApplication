@@ -97,17 +97,6 @@ extension MainViewPresenter: LocationManagerDelegate {
 
 private extension MainViewPresenter {
     func saveCurrentWeatherInformation(_ data: CurrentWeatherResponse) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let city = City(context: context)
-        city.name = data.name
-        city.longitude =  data.coord.lon
-        city.latitude =  data.coord.lat
-        
-        do {
-            try context.save()
-        } catch {
-            print(error)
-        }
+        self.router?.citiesManager.saveCityData(data)
     }
 }
