@@ -8,10 +8,8 @@
 import Foundation
 import UIKit
 
-class CityWeatherTableViewCell: UITableViewCell {
+class CityWeatherView: UIView {
 
-    static let id = "CityWeatherTableViewCell"
-    
     // MARK: - Views
     
     private lazy var cityWeatherLayerView: UIView = {
@@ -47,18 +45,13 @@ class CityWeatherTableViewCell: UITableViewCell {
     
     // MARK: - Initialization
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    init() {
+        super.init(frame: .zero)
         
-        configureCell()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
     }
     
     //
@@ -69,15 +62,15 @@ class CityWeatherTableViewCell: UITableViewCell {
         configureLayout()
     }
     
-    func updateData(_ data: City) {
-        cityNameLabel.text = data.name
-    }
+//    func updateData(_ data: City) {
+//        cityNameLabel.text = data.name
+//    }
     
 }
 
 // MARK: - Appearance Methods
 
-private extension CityWeatherTableViewCell {
+private extension CityWeatherView {
     func setupAppearance() {
         self.backgroundColor = .clear
     }

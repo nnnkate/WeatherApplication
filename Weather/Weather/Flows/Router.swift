@@ -12,7 +12,6 @@ protocol RouterMain {
     var navigationController: UINavigationController? { get }
     var builder: ModuleBuilder? { get }
     var networkService: NetworkServiceProtocol { get }
-    var citiesManager: CitiesManager { get }
 }
 
 protocol RouterProtocol: RouterMain {
@@ -24,13 +23,11 @@ class Router: RouterProtocol {
     private(set) var navigationController: UINavigationController?
     private(set) var builder: ModuleBuilder?
     private(set) var networkService: NetworkServiceProtocol
-    private(set) var citiesManager: CitiesManager
     
-    init(navigationController: UINavigationController, builder: ModuleBuilder, networkService: NetworkServiceProtocol, citiesManager: CitiesManager) {
+    init(navigationController: UINavigationController, builder: ModuleBuilder, networkService: NetworkServiceProtocol) {
         self.navigationController = navigationController
         self.builder = builder
         self.networkService = networkService
-        self.citiesManager = citiesManager
     }
     
     func initialViewController() {

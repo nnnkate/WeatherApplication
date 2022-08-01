@@ -58,7 +58,6 @@ extension MainViewPresenter: MainViewPresenterProtocol {
         guard let location = locationManager.location else { return }
         router?.networkService.getCurrentWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { [weak self] data, error in
             guard let weatherResponse = data else { return }
-            self?.saveCurrentWeatherInformation(weatherResponse)
             self?.view?.updateCurrentWeather(weatherResponse)
             
             if let error = error {
@@ -90,13 +89,5 @@ extension MainViewPresenter: LocationManagerDelegate {
     func locationDidUpdate(_ location: CLLocation?) {
         getCurrentWeather()
         getSeveralDaysWeather()
-    }
-}
-
-// MARK: - CoreData
-
-private extension MainViewPresenter {
-    func saveCurrentWeatherInformation(_ data: CurrentWeatherResponse) {
-        self.router?.citiesManager.saveCityData(data)
     }
 }
