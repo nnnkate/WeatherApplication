@@ -16,6 +16,7 @@ protocol SearchViewProtocol: AnyObject {
 
 protocol SearchViewPresenterProtocol: AnyObject {
     func searchCityWeatherData()
+    func getTimestampsNumber() -> Int
 }
 
 class SearchViewPresenter {
@@ -41,6 +42,10 @@ class SearchViewPresenter {
 extension SearchViewPresenter: SearchViewPresenterProtocol {
     func searchCityWeatherData(){
        
+    }
+    
+    func getTimestampsNumber() -> Int {
+        router?.networkService.timestampsNumber ?? 0
     }
 }
 
