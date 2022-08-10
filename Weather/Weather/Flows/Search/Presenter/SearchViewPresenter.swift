@@ -11,11 +11,12 @@ import CoreLocation
 import CoreData
 
 protocol SearchViewProtocol: AnyObject {
-    func updateView()
+    //func updateView()
+    func updateSeveralDaysWeather(_ data: SeveralDaysWeather)
 }
 
 protocol SearchViewPresenterProtocol: AnyObject {
-    func searchCityWeatherData()
+    func searchCityWeatherData(searchText: String)
     func getTimestampsNumber() -> Int
 }
 
@@ -40,8 +41,15 @@ class SearchViewPresenter {
 // MARK: - SearchViewPresenterProtocol
 
 extension SearchViewPresenter: SearchViewPresenterProtocol {
-    func searchCityWeatherData(){
-       
+    func searchCityWeatherData(searchText: String){
+        router?.networkService.getWeatherBySearch(searchText: searchText) { [weak self] data, error in
+            guard let severalDaysWeatherData = data.1 else { return }
+            self?.view?.updateSeveralDaysWeather(severalDaysWeatherData)
+            
+            if let error = error.1 {
+                print(error)
+            }
+        }
     }
     
     func getTimestampsNumber() -> Int {

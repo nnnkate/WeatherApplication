@@ -16,10 +16,18 @@ class SearchViewController: UIViewController {
     
     private lazy var severalDaysWeatherViewHeight = CGFloat(presenter.getTimestampsNumber()) * 50
     
+    private var searchHasBeenCompleted = false {
+        didSet {
+            changeViewsVisibility()
+        }
+    }
+    
     // MARK: - Views
     
     private lazy var searchTextField: SearchTextField = {
         let searchTextField = SearchTextField()
+        
+        searchTextField.addTarget(self, action: #selector(searchTextFieldDidChange), for: .editingDidEndOnExit)
        
         return searchTextField
     }()
@@ -45,7 +53,7 @@ class SearchViewController: UIViewController {
         addSubviews()
         configureLayout()
         
-        //getWeatherData()
+        changeViewsVisibility()
     }
 }
 
@@ -78,7 +86,7 @@ private extension SearchViewController {
         NSLayoutConstraint.activate([
             cityWeatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10.horizontalAdapted),
             cityWeatherView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            cityWeatherView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 5.verticalAdapted),
+            cityWeatherView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 10.verticalAdapted),
             cityWeatherView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3)
         ])
         
@@ -86,17 +94,25 @@ private extension SearchViewController {
         NSLayoutConstraint.activate([
             severalDaysWeatherView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             severalDaysWeatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10.horizontalAdapted),
-            severalDaysWeatherView.topAnchor.constraint(equalTo: cityWeatherView.bottomAnchor, constant: 5.verticalAdapted),
+            severalDaysWeatherView.topAnchor.constraint(equalTo: cityWeatherView.bottomAnchor, constant: 10.verticalAdapted),
             severalDaysWeatherView.heightAnchor.constraint(equalToConstant: severalDaysWeatherViewHeight)
         ])
+    }
+    
+    func changeViewsVisibility() {
+        severalDaysWeatherView.isHidden = !searchHasBeenCompleted
     }
 }
 
 // MARK: - MainViewProtocol
 
 extension SearchViewController: SearchViewProtocol {
-    func updateView() {
-       
+    func updateSeveralDaysWeather(_ data: SeveralDaysWeather) {
+        searchHasBeenCompleted = true
+        
+        severalDaysWeatherView.updateView(with: data)
+        
+        //severalDaysWeatherDataIsLoaded = true
     }
 }
 
@@ -104,7 +120,16 @@ extension SearchViewController: SearchViewProtocol {
 
 private extension SearchViewController {
     func searchCityWeatherData() {
-        presenter.searchCityWeatherData()
+        guard let searchText = searchTextField.text else { return }
+        presenter.searchCityWeatherData(searchText: searchText)
+    }
+}
+
+// MARK: - Actions
+
+private extension SearchViewController {
+    @objc func searchTextFieldDidChange(_ textField: UITextField) {
+        searchCityWeatherData()
     }
 }
 
