@@ -11,7 +11,7 @@ import CoreLocation
 import CoreData
 
 protocol SearchViewProtocol: AnyObject {
-    //func updateView()
+    func updateCityWeatherView(_ data: SearchWeatherResponse)
     func updateSeveralDaysWeather(_ data: SeveralDaysWeather)
 }
 
@@ -43,6 +43,13 @@ class SearchViewPresenter {
 extension SearchViewPresenter: SearchViewPresenterProtocol {
     func searchCityWeatherData(searchText: String){
         router?.networkService.getWeatherBySearch(searchText: searchText) { [weak self] data, error in
+            guard let cityWeatherData = data.0 else { return }
+            self?.view?.updateCityWeatherView(cityWeatherData)
+            
+            if let error = error.0 {
+                print(error)
+            }
+            
             guard let severalDaysWeatherData = data.1 else { return }
             self?.view?.updateSeveralDaysWeather(severalDaysWeatherData)
             

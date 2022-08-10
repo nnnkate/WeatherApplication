@@ -1,5 +1,5 @@
 //
-//  CityWeatherTableViewCell.swift
+//  CityWeatherView.swift
 //  Weather
 //
 //  Created by Ekaterina Nedelko on 30.07.22.
@@ -48,23 +48,18 @@ class CityWeatherView: UIView {
     init() {
         super.init(frame: .zero)
         
+        setupAppearance()
+        addSubviews()
+        configureLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //
-
-    private func configureCell() {
-        setupAppearance()
-        addSubviews()
-        configureLayout()
+    func updateData(_ data: SearchWeatherResponse) {
+        cityNameLabel.text = data.list.first?.name
     }
-    
-//    func updateData(_ data: City) {
-//        cityNameLabel.text = data.name
-//    }
     
 }
 

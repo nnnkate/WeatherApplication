@@ -32,7 +32,7 @@ class SearchViewController: UIViewController {
         return searchTextField
     }()
     
-    lazy var cityWeatherView: CityWeatherView = {
+    private lazy var cityWeatherView: CityWeatherView = {
         let cityWeatherView = CityWeatherView()
     
         return cityWeatherView
@@ -81,7 +81,6 @@ private extension SearchViewController {
             searchTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05)
         ])
         
-        cityWeatherView.backgroundColor = .yellow
         cityWeatherView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             cityWeatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10.horizontalAdapted),
@@ -100,6 +99,7 @@ private extension SearchViewController {
     }
     
     func changeViewsVisibility() {
+        cityWeatherView.isHidden = !searchHasBeenCompleted
         severalDaysWeatherView.isHidden = !searchHasBeenCompleted
     }
 }
@@ -107,12 +107,14 @@ private extension SearchViewController {
 // MARK: - MainViewProtocol
 
 extension SearchViewController: SearchViewProtocol {
-    func updateSeveralDaysWeather(_ data: SeveralDaysWeather) {
+    func updateCityWeatherView(_ data: SearchWeatherResponse) {
         searchHasBeenCompleted = true
         
+        cityWeatherView.updateData(data)
+    }
+    
+    func updateSeveralDaysWeather(_ data: SeveralDaysWeather) {
         severalDaysWeatherView.updateView(with: data)
-        
-        //severalDaysWeatherDataIsLoaded = true
     }
 }
 
