@@ -58,7 +58,11 @@ class CityWeatherView: UIView {
     }
     
     func updateData(_ data: SearchWeatherResponse) {
-        cityNameLabel.text = data.list.first?.name
+        guard let cityWeather = data.list.first else { return }
+        cityNameLabel.text = cityWeather.name
+        
+        guard let weatherCondition = WeatherCondition(id: cityWeather.weather.first?.id ?? 0) else { return }
+        cityWeatherConditionImage.image = weatherCondition.image
     }
     
 }
@@ -95,10 +99,10 @@ private extension CityWeatherView {
 
         cityWeatherConditionImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cityWeatherConditionImage.heightAnchor.constraint(equalTo: cityWeatherLayerView.heightAnchor, multiplier: 0.5),
+            cityWeatherConditionImage.heightAnchor.constraint(equalTo: cityWeatherLayerView.heightAnchor, multiplier: 0.3),
             cityWeatherConditionImage.widthAnchor.constraint(equalTo: cityWeatherConditionImage.heightAnchor),
             cityWeatherConditionImage.trailingAnchor.constraint(equalTo: cityWeatherLayerView.trailingAnchor, constant: -5.verticalAdapted),
-            cityWeatherConditionImage.topAnchor.constraint(equalTo: cityWeatherLayerView.topAnchor, constant: 5.verticalAdapted)
+            cityWeatherConditionImage.centerYAnchor.constraint(equalTo: cityWeatherLayerView.centerYAnchor)
         ])
     }
 }
