@@ -45,7 +45,7 @@ class CityWeatherView: UIView {
         let temperatureLabel = UILabel()
         temperatureLabel.textColor = .white
         temperatureLabel.font = .systemFont(ofSize: 25, weight: .bold)
-        temperatureLabel.text = "12"
+        temperatureLabel.adjustsFontSizeToFitWidth = true
         
         return temperatureLabel
     }()
@@ -67,6 +67,7 @@ class CityWeatherView: UIView {
     func updateData(_ data: SearchWeatherResponse) {
         guard let cityWeather = data.list.first else { return }
         cityNameLabel.text = cityWeather.name
+        temperatureLabel.text = "\(Int(cityWeather.main.temp))°"
         
         guard let weatherCondition = WeatherCondition(id: cityWeather.weather.first?.id ?? 0) else { return }
         cityWeatherConditionImage.image = weatherCondition.image
