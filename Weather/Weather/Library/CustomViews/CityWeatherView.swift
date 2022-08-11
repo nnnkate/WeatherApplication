@@ -44,7 +44,7 @@ class CityWeatherView: UIView {
     private lazy var temperatureLabel: UILabel = {
         let temperatureLabel = UILabel()
         temperatureLabel.textColor = .white
-        temperatureLabel.font = .systemFont(ofSize: 25, weight: .bold)
+        temperatureLabel.font = .systemFont(ofSize: 40, weight: .bold)
         temperatureLabel.adjustsFontSizeToFitWidth = true
         
         return temperatureLabel
@@ -103,12 +103,12 @@ private extension CityWeatherView {
             cityNameLabel.heightAnchor.constraint(equalTo: cityWeatherLayerView.heightAnchor, multiplier: 0.5),
             cityNameLabel.centerYAnchor.constraint(equalTo: cityWeatherLayerView.centerYAnchor),
             cityNameLabel.leadingAnchor.constraint(equalTo: cityWeatherLayerView.leadingAnchor, constant: 5.verticalAdapted),
-            cityNameLabel.topAnchor.constraint(equalTo: cityWeatherLayerView.topAnchor, constant: 5.verticalAdapted)
+            cityNameLabel.centerYAnchor.constraint(equalTo: cityWeatherLayerView.centerYAnchor)
         ])
 
         cityWeatherConditionImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cityWeatherConditionImage.heightAnchor.constraint(equalTo: cityWeatherLayerView.heightAnchor, multiplier: 0.3),
+            cityWeatherConditionImage.heightAnchor.constraint(equalTo: cityWeatherLayerView.heightAnchor, multiplier: 0.5),
             cityWeatherConditionImage.widthAnchor.constraint(equalTo: cityWeatherConditionImage.heightAnchor),
             cityWeatherConditionImage.trailingAnchor.constraint(equalTo: cityWeatherLayerView.trailingAnchor, constant: -5.verticalAdapted),
             cityWeatherConditionImage.centerYAnchor.constraint(equalTo: cityWeatherLayerView.centerYAnchor)
@@ -116,9 +116,9 @@ private extension CityWeatherView {
         
         temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            temperatureLabel.heightAnchor.constraint(equalTo: cityWeatherLayerView.heightAnchor, multiplier: 0.3),
+            temperatureLabel.heightAnchor.constraint(equalTo: cityWeatherLayerView.heightAnchor, multiplier: 0.5),
             temperatureLabel.widthAnchor.constraint(equalTo: cityWeatherConditionImage.heightAnchor),
-            temperatureLabel.leadingAnchor.constraint(equalTo: cityWeatherLayerView.leadingAnchor, constant: 5.verticalAdapted),
+            temperatureLabel.trailingAnchor.constraint(equalTo: cityWeatherConditionImage.leadingAnchor, constant: -15.verticalAdapted),
             temperatureLabel.centerYAnchor.constraint(equalTo: cityWeatherLayerView.centerYAnchor)
         ])
     }

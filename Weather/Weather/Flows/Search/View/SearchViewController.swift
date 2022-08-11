@@ -86,14 +86,14 @@ private extension SearchViewController {
             cityWeatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10.horizontalAdapted),
             cityWeatherView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             cityWeatherView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 10.verticalAdapted),
-            cityWeatherView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
+            cityWeatherView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
         ])
         
         severalDaysWeatherView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             severalDaysWeatherView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             severalDaysWeatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10.horizontalAdapted),
-            severalDaysWeatherView.topAnchor.constraint(equalTo: cityWeatherView.bottomAnchor, constant: 10.verticalAdapted),
+            severalDaysWeatherView.topAnchor.constraint(equalTo: cityWeatherView.bottomAnchor, constant: 15.verticalAdapted),
             severalDaysWeatherView.heightAnchor.constraint(equalToConstant: severalDaysWeatherViewHeight)
         ])
     }
