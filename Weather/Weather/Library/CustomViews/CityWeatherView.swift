@@ -38,9 +38,16 @@ class CityWeatherView: UIView {
         cityWeatherConditionImage.contentMode = .scaleAspectFit
         cityWeatherConditionImage.tintColor = .white
         
-        cityWeatherConditionImage.image = UIImage(systemName: "cloud")
-        
         return cityWeatherConditionImage
+    }()
+    
+    private lazy var temperatureLabel: UILabel = {
+        let temperatureLabel = UILabel()
+        temperatureLabel.textColor = .white
+        temperatureLabel.font = .systemFont(ofSize: 25, weight: .bold)
+        temperatureLabel.text = "12"
+        
+        return temperatureLabel
     }()
     
     // MARK: - Initialization
@@ -78,6 +85,7 @@ private extension CityWeatherView {
         addSubview(cityWeatherLayerView)
         cityWeatherLayerView.addSubview(cityNameLabel)
         cityWeatherLayerView.addSubview(cityWeatherConditionImage)
+        cityWeatherLayerView.addSubview(temperatureLabel)
     }
     
     func configureLayout() {
@@ -103,6 +111,14 @@ private extension CityWeatherView {
             cityWeatherConditionImage.widthAnchor.constraint(equalTo: cityWeatherConditionImage.heightAnchor),
             cityWeatherConditionImage.trailingAnchor.constraint(equalTo: cityWeatherLayerView.trailingAnchor, constant: -5.verticalAdapted),
             cityWeatherConditionImage.centerYAnchor.constraint(equalTo: cityWeatherLayerView.centerYAnchor)
+        ])
+        
+        temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            temperatureLabel.heightAnchor.constraint(equalTo: cityWeatherLayerView.heightAnchor, multiplier: 0.3),
+            temperatureLabel.widthAnchor.constraint(equalTo: cityWeatherConditionImage.heightAnchor),
+            temperatureLabel.leadingAnchor.constraint(equalTo: cityWeatherLayerView.leadingAnchor, constant: 5.verticalAdapted),
+            temperatureLabel.centerYAnchor.constraint(equalTo: cityWeatherLayerView.centerYAnchor)
         ])
     }
 }
