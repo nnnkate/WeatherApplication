@@ -13,6 +13,7 @@ import CoreData
 protocol SearchViewProtocol: AnyObject {
     func updateCityWeatherView(_ data: SearchWeatherResponse)
     func updateSeveralDaysWeather(_ data: SeveralDaysWeather)
+    func changeViewsVisibility(_ searchHasBeenCompleted: Bool)
 }
 
 protocol SearchViewPresenterProtocol: AnyObject {
@@ -30,6 +31,12 @@ class SearchViewPresenter {
     
     private var router: RouterProtocol?
     
+    private var searchHasBeenCompleted = false {
+        didSet {
+            view?.changeViewsVisibility(searchHasBeenCompleted)
+        }
+    }
+    
     // MARK: - Initialization
 
     required init(view: SearchViewProtocol, router: RouterProtocol) {
@@ -44,6 +51,7 @@ extension SearchViewPresenter: SearchViewPresenterProtocol {
     func searchCityWeatherData(searchText: String){
         router?.networkService.getWeatherBySearch(searchText: searchText) { [weak self] data, error in
             guard let cityWeatherData = data.0 else { return }
+            self?.searchHasBeenCompleted = true
             self?.view?.updateCityWeatherView(cityWeatherData)
             
             if let error = error.0 {

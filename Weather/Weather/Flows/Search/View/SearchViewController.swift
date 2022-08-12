@@ -16,12 +16,6 @@ class SearchViewController: UIViewController {
     
     private lazy var severalDaysWeatherViewHeight = CGFloat(presenter.getTimestampsNumber()) * 50
     
-    private var searchHasBeenCompleted = false {
-        didSet {
-            changeViewsVisibility()
-        }
-    }
-    
     // MARK: - Views
     
     private lazy var searchTextField: SearchTextField = {
@@ -52,8 +46,6 @@ class SearchViewController: UIViewController {
         setupAppearance()
         addSubviews()
         configureLayout()
-        
-        changeViewsVisibility()
     }
 }
 
@@ -63,6 +55,7 @@ private extension SearchViewController {
     func setupAppearance() {
         view.backgroundColor = .customPurple
         navigationController?.navigationBar.tintColor = .white
+        changeViewsVisibility(false) 
     }
     
     func addSubviews() {
@@ -97,24 +90,22 @@ private extension SearchViewController {
             severalDaysWeatherView.heightAnchor.constraint(equalToConstant: severalDaysWeatherViewHeight)
         ])
     }
-    
-    func changeViewsVisibility() {
-        cityWeatherView.isHidden = !searchHasBeenCompleted
-        severalDaysWeatherView.isHidden = !searchHasBeenCompleted
-    }
 }
 
 // MARK: - MainViewProtocol
 
 extension SearchViewController: SearchViewProtocol {
     func updateCityWeatherView(_ data: SearchWeatherResponse) {
-        searchHasBeenCompleted = true
-        
         cityWeatherView.updateData(data)
     }
     
     func updateSeveralDaysWeather(_ data: SeveralDaysWeather) {
         severalDaysWeatherView.updateView(with: data)
+    }
+    
+    func changeViewsVisibility(_ searchHasBeenCompleted: Bool) {
+        cityWeatherView.isHidden = !searchHasBeenCompleted
+        severalDaysWeatherView.isHidden = !searchHasBeenCompleted
     }
 }
 

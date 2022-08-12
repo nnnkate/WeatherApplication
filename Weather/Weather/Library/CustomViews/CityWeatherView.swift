@@ -72,7 +72,6 @@ class CityWeatherView: UIView {
         guard let weatherCondition = WeatherCondition(id: cityWeather.weather.first?.id ?? 0) else { return }
         cityWeatherConditionImage.image = weatherCondition.image
     }
-    
 }
 
 // MARK: - Appearance Methods
