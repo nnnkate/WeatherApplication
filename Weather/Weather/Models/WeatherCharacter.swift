@@ -46,7 +46,19 @@ extension WeatherCharacter {
             
         case .humidity:
             return NSLocalizedString("humidity", comment: "")
-
+        }
+    }
+    
+    var unit: String {
+        switch self {
+        case .minTemp, .maxTemp:
+            return "°"
+            
+        case .windSpeed:
+            return " m/s"
+            
+        case .humidity:
+            return "%"
         }
     }
 }

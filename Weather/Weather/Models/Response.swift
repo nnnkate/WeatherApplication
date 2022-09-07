@@ -55,6 +55,10 @@ struct DayData: Decodable {
     }
 }
 
+struct SearchWeatherResponse: Decodable {
+    var list: [CurrentWeatherResponse]
+}
+
 struct CurrentWeatherResponse: Decodable {
     var coord: CoordinatesResponse
     var weather: [Weather]

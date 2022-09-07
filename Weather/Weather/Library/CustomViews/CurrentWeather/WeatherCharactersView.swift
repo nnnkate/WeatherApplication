@@ -52,8 +52,11 @@ final class WeatherCharactersView: UIView {
     
     // MARK: - Public Methods
     
-    func updateView() {
-        
+    func updateView(with data: CurrentWeatherResponse) {
+        minTemperatureView.updateView(with: data.main.tempMin)
+        maxTemperatureView.updateView(with: data.main.tempMax)
+        windSpeedView.updateView(with: data.wind.speed)
+        humidityView.updateView(with: data.main.humidity)
     }
 }
 
@@ -63,7 +66,7 @@ private extension WeatherCharactersView {
     private func setupApearance() {
         self.backgroundColor = .white.withAlphaComponent(0.3)
         self.addShadow(color: .white)
-        self.layer.cornerRadius = 13.HAdapted
+        self.layer.cornerRadius = 13
     }
     
     func addSubviews() {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MainViewController: UIViewController {
     
@@ -61,7 +62,7 @@ class MainViewController: UIViewController {
         cityNameLabel.textColor = .white
         cityNameLabel.numberOfLines = 1
         cityNameLabel.textAlignment = .left
-        cityNameLabel.font = .systemFont(ofSize: CGFloat(40).adaptedFontSize, weight: .bold)
+        cityNameLabel.font = .systemFont(ofSize: 40, weight: .bold)
         cityNameLabel.adjustsFontSizeToFitWidth = true
         cityNameLabel.minimumScaleFactor = 0.5
 
@@ -73,7 +74,7 @@ class MainViewController: UIViewController {
         currentDateLabel.textColor = .white
         currentDateLabel.numberOfLines = 1
         currentDateLabel.textAlignment = .left
-        currentDateLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize, weight: .regular)
+        currentDateLabel.font = .systemFont(ofSize: 20, weight: .regular)
         currentDateLabel.adjustsFontSizeToFitWidth = true
         currentDateLabel.minimumScaleFactor = 0.5
 
@@ -93,7 +94,7 @@ class MainViewController: UIViewController {
         currentTemperatureLabel.textColor = .white
         currentTemperatureLabel.numberOfLines = 1
         currentTemperatureLabel.textAlignment = .right
-        currentTemperatureLabel.font = .systemFont(ofSize: CGFloat(70).adaptedFontSize, weight: .regular)
+        currentTemperatureLabel.font = .systemFont(ofSize: 70, weight: .regular)
         currentTemperatureLabel.adjustsFontSizeToFitWidth = true
         currentTemperatureLabel.minimumScaleFactor = 0.5
 
@@ -164,23 +165,23 @@ private extension MainViewController {
     func configureLayout() {
         cityNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cityNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
+            cityNameLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             cityNameLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor),
-            cityNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10.VAdapted),
-            cityNameLabel.heightAnchor.constraint(equalToConstant: 45.VAdapted)
+            cityNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            cityNameLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05)
         ])
         
         currentDateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            currentDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
+            currentDateLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             currentDateLabel.trailingAnchor.constraint(equalTo: view.centerXAnchor),
-            currentDateLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 5.VAdapted),
-            currentDateLabel.heightAnchor.constraint(equalToConstant: 25.VAdapted)
+            currentDateLabel.topAnchor.constraint(equalToSystemSpacingBelow: cityNameLabel.bottomAnchor, multiplier: 0.5),
+            currentDateLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.03)
         ])
         
         weatherConditionImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            weatherConditionImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
+            weatherConditionImage.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             weatherConditionImage.centerYAnchor.constraint(equalTo: currentTemperatureLabel.centerYAnchor),
             weatherConditionImage.heightAnchor.constraint(equalTo: currentTemperatureLabel.heightAnchor, multiplier: 0.9),
             weatherConditionImage.widthAnchor.constraint(equalTo: weatherConditionImage.heightAnchor)
@@ -188,34 +189,34 @@ private extension MainViewController {
        
         currentTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            currentTemperatureLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.HAdapted),
+            currentTemperatureLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             currentTemperatureLabel.leadingAnchor.constraint(equalTo: view.centerXAnchor),
-            currentTemperatureLabel.topAnchor.constraint(equalTo: currentDateLabel.bottomAnchor, constant: 5.VAdapted),
-            currentTemperatureLabel.heightAnchor.constraint(equalToConstant: 80.VAdapted)
+            currentTemperatureLabel.topAnchor.constraint(equalToSystemSpacingBelow: currentDateLabel.bottomAnchor, multiplier: 0.5),
+            currentTemperatureLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06)
         ])
         
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
-            backgroundImageView.topAnchor.constraint(equalTo: currentTemperatureLabel.bottomAnchor, constant: 5.VAdapted),
+            backgroundImageView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            backgroundImageView.topAnchor.constraint(equalToSystemSpacingBelow: currentTemperatureLabel.bottomAnchor, multiplier: 1),
             backgroundImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
         ])
         
         weatherCharactersView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             weatherCharactersView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            weatherCharactersView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
-            weatherCharactersView.topAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: 20.VAdapted),
-            weatherCharactersView.heightAnchor.constraint(equalToConstant: 140.VAdapted)
+            weatherCharactersView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            weatherCharactersView.topAnchor.constraint(equalToSystemSpacingBelow: backgroundImageView.bottomAnchor, multiplier: 1),
+            weatherCharactersView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.16)
         ])
         
         severalDaysWeatherView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             severalDaysWeatherView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            severalDaysWeatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.HAdapted),
-            severalDaysWeatherView.topAnchor.constraint(equalTo: weatherCharactersView.bottomAnchor, constant: 20.VAdapted),
-            severalDaysWeatherView.heightAnchor.constraint(equalToConstant: Int(severalDaysWeatherViewHeight).VAdapted)
+            severalDaysWeatherView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            severalDaysWeatherView.topAnchor.constraint(equalToSystemSpacingBelow: weatherCharactersView.bottomAnchor, multiplier: 1),
+            severalDaysWeatherView.heightAnchor.constraint(equalToConstant: severalDaysWeatherViewHeight)
         ])
         
         spinnerView.translatesAutoresizingMaskIntoConstraints = false
@@ -232,7 +233,6 @@ private extension MainViewController {
 
 extension MainViewController: MainViewProtocol {
     func updateCurrentWeather(_ data: CurrentWeatherResponse) {
-        print(data) // temporary
         cityNameLabel.text = data.name
         let today = NSLocalizedString("today", comment: "")
         currentDateLabel.text = "\(today), \(Date().formatted(.dateTime.month().day().hour().minute()))"
@@ -241,11 +241,12 @@ extension MainViewController: MainViewProtocol {
         guard let weatherCondition = WeatherCondition(id: data.weather.first?.id ?? 0) else { return }
         self.weatherConditionImage.image = weatherCondition.image
         
+        weatherCharactersView.updateView(with: data)
+        
         currentWeatherDataIsLoaded = true
     }
     
     func updateSeveralDaysWeather(_ data: SeveralDaysWeather) {
-        print(data) // temporary
         severalDaysWeatherView.updateView(with: data)
         
         severalDaysWeatherDataIsLoaded = true
@@ -256,7 +257,7 @@ extension MainViewController: MainViewProtocol {
 
 private extension MainViewController {
     func handleRightBarButtonItem() {
-        print("+")
+        presenter.showSearchScreen()
     }
 }
 

@@ -10,12 +10,15 @@ import UIKit
 
 final class WeatherCharacterView: UIView {
     
+    private var character: WeatherCharacter!
+    
     // MARK: - Views
     
     private lazy var frameImage: UIImageView = {
         let frameImage = UIImageView()
         frameImage.contentMode = .scaleAspectFit
         frameImage.tintColor = .customDarkPurple
+        frameImage.alpha = 0.6
         
         frameImage.image = UIImage(systemName: "circle")
 
@@ -26,36 +29,38 @@ final class WeatherCharacterView: UIView {
         let weatherCharacterImage = UIImageView()
         weatherCharacterImage.contentMode = .scaleAspectFit
         weatherCharacterImage.tintColor = .customDarkPurple
-
+        weatherCharacterImage.alpha = 0.8
+        
         return weatherCharacterImage
     }()
     
     private let characterStack: UIStackView = {
         let characterStack = UIStackView()
         characterStack.axis = .vertical
-        characterStack.distribution = .equalCentering
-        characterStack.alignment = .center
-        characterStack.spacing = 2.VAdapted
+        characterStack.distribution = .fillProportionally
+        characterStack.alignment = .leading
+        characterStack.spacing = 2
         
         return characterStack
     }()
     
     private lazy var characterNameLabel: UILabel = {
         let characterNameLabel = UILabel()
-        characterNameLabel.font = .systemFont(ofSize: CGFloat(15).adaptedFontSize)
+        characterNameLabel.font = .systemFont(ofSize: CGFloat(5).adaptedFontSize())
         characterNameLabel.textColor = .customDarkPurple
         characterNameLabel.adjustsFontSizeToFitWidth = true
+        characterNameLabel.minimumScaleFactor = 0.5
         
         return characterNameLabel
     }()
     
     private lazy var characterValueLabel: UILabel = {
         let characterValueLabel = UILabel()
-        characterValueLabel.font = .systemFont(ofSize: CGFloat(35).adaptedFontSize)
+        characterValueLabel.font = .systemFont(ofSize: CGFloat(12).adaptedFontSize())
         characterValueLabel.textColor = .customDarkPurple
         characterValueLabel.adjustsFontSizeToFitWidth = true
-        
-        characterValueLabel.text = "20"
+        characterValueLabel.minimumScaleFactor = 0.5
+        characterValueLabel.textAlignment = .center
         
         return characterValueLabel
     }()
@@ -65,7 +70,9 @@ final class WeatherCharacterView: UIView {
     init(character: WeatherCharacter) {
         super.init(frame: .zero)
         
-        setupApearance(character: character)
+        self.character = character
+        
+        setupApearance()
         addSubviews()
         configureLayout()
     }
@@ -76,15 +83,15 @@ final class WeatherCharacterView: UIView {
     
     // MARK: - Public Methods
     
-    func updateView() {
-        
+    func updateView(with value: Double) {
+        characterValueLabel.text = String(value) + character.unit
     }
 }
 
 // MARK: - Appearance Methods
 
 private extension WeatherCharacterView {
-    private func setupApearance(character: WeatherCharacter) {
+    private func setupApearance() {
         weatherCharacterImage.image = character.image
         characterNameLabel.text = character.title
     }
@@ -101,26 +108,27 @@ private extension WeatherCharacterView {
     func configureLayout() {
         frameImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            frameImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5.HAdapted),
+            frameImage.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
             frameImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-            frameImage.trailingAnchor.constraint(equalTo: centerXAnchor),
-            frameImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5.VAdapted)
+            frameImage.widthAnchor.constraint(equalTo: frameImage.heightAnchor),
+            frameImage.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: -3)
         ])
         
         weatherCharacterImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            weatherCharacterImage.leadingAnchor.constraint(equalTo: frameImage.leadingAnchor, constant: 15.HAdapted),
+            weatherCharacterImage.leadingAnchor.constraint(equalToSystemSpacingAfter: frameImage.leadingAnchor, multiplier: 2),
             weatherCharacterImage.centerYAnchor.constraint(equalTo: frameImage.centerYAnchor),
             weatherCharacterImage.centerXAnchor.constraint(equalTo: frameImage.centerXAnchor),
-            weatherCharacterImage.bottomAnchor.constraint(equalTo: frameImage.bottomAnchor, constant: -15.HAdapted)
+            weatherCharacterImage.topAnchor.constraint(equalToSystemSpacingBelow: frameImage.topAnchor, multiplier: 2)
         ])
         
         characterStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            characterStack.topAnchor.constraint(equalTo: topAnchor, constant: 5.VAdapted),
-            characterStack.leadingAnchor.constraint(equalTo: weatherCharacterImage.trailingAnchor, constant: 2.HAdapted),
-            characterStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5.HAdapted),
-            characterStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5.VAdapted)
+            characterStack.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 0.003),
+            characterStack.leadingAnchor.constraint(equalToSystemSpacingAfter: frameImage.trailingAnchor, multiplier: 1),
+            characterStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            characterStack.trailingAnchor.constraint(equalToSystemSpacingAfter: trailingAnchor, multiplier: 0),
+            characterStack.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: 0.003)
         ])
     }
 }

@@ -21,7 +21,7 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
     
     private lazy var weakDayNameLabel: UILabel = {
         let weakDayNameLabel = UILabel()
-        weakDayNameLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
+        weakDayNameLabel.font = .systemFont(ofSize: 20)
         weakDayNameLabel.textColor = .customDarkPurple
         
         return weakDayNameLabel
@@ -37,7 +37,7 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
     
     private lazy var maxTemperatureLabel: UILabel = {
         let maxTemperatureLabel = UILabel()
-        maxTemperatureLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
+        maxTemperatureLabel.font = .systemFont(ofSize: 20)
         maxTemperatureLabel.textColor = .customDarkPurple
         
         return maxTemperatureLabel
@@ -54,7 +54,7 @@ class DaysWeatherDataTableViewCell: UITableViewCell {
     
     private lazy var minTemperatureLabel: UILabel = {
         let minTemperatureLabel = UILabel()
-        minTemperatureLabel.font = .systemFont(ofSize: CGFloat(20).adaptedFontSize)
+        minTemperatureLabel.font = .systemFont(ofSize: 20)
         minTemperatureLabel.textColor = .customDarkPurple
         
         return minTemperatureLabel

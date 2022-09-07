@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import UIKit
 import CoreLocation
+import CoreData
 
 protocol MainViewProtocol: AnyObject {
     func updateCurrentWeather(_ data: CurrentWeatherResponse)
@@ -17,6 +19,7 @@ protocol MainViewPresenterProtocol: AnyObject {
     func getCurrentWeather()
     func getSeveralDaysWeather()
     func getTimestampsNumber() -> Int
+    func showSearchScreen()
 }
 
 class MainViewPresenter {
@@ -47,6 +50,10 @@ class MainViewPresenter {
 // MARK: - MainViewPresenterProtocol
 
 extension MainViewPresenter: MainViewPresenterProtocol {
+    func showSearchScreen() {
+        self.router?.searchViewController()
+    }
+    
     func getCurrentWeather() {
         guard let location = locationManager.location else { return }
         router?.networkService.getCurrentWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { [weak self] data, error in

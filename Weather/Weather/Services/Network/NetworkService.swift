@@ -12,6 +12,7 @@ protocol NetworkServiceProtocol {
     var timestampsNumber: Int { get }
     func getCurrentWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: @escaping (CurrentWeatherResponse?, Error?) -> ())
     func getSeveralDaysWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: @escaping (SeveralDaysWeather?, Error?) -> ())
+    func getWeatherBySearch(searchText: String, completion: @escaping ((SearchWeatherResponse?, SeveralDaysWeather?), (Error?, Error?)) -> ())
 }
 
 class NetworkService {
@@ -92,6 +93,63 @@ extension NetworkService: NetworkServiceProtocol {
             }
             catch let error {
                 completion(nil, error)
+            }
+        }
+    }
+    
+    func getWeatherBySearch(searchText: String, completion: @escaping ((SearchWeatherResponse?, SeveralDaysWeather?), (Error?, Error?)) -> ()) {
+        let searchUrlString = "https://api.openweathermap.org/data/2.5/find?q=\(searchText)&units=metric&type=like&APPID=\(appID)"
+        
+        var currentWeatherResponse: SearchWeatherResponse? = nil
+        var severalDaysWeather: SeveralDaysWeather? = nil
+        var currentWeatherResponseError: Error? = nil
+        var severalDaysWeatherError: Error? = nil
+        
+        fetchData(urlString: searchUrlString) { [self] data, error in
+            if let error = error {
+                currentWeatherResponseError = error
+                completion((currentWeatherResponse, severalDaysWeather), (currentWeatherResponseError, severalDaysWeatherError))
+                return
+            }
+            guard let data = data else { return }
+            
+            let decoder = JSONDecoder()
+            
+            do {
+                let weatherResponse = try decoder.decode(SearchWeatherResponse.self, from: data)
+                currentWeatherResponse = weatherResponse
+                
+                guard let currentWeather = currentWeatherResponse?.list.first else { return }
+                
+                let latitude = currentWeather.coord.lat
+                let longitude = currentWeather.coord.lon
+                
+                let severalDaysUrlString = "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&appid=\(self.appID)&units=metric"
+                
+                self.fetchData(urlString: severalDaysUrlString) { data, error in
+                    if let error = error {
+                        severalDaysWeatherError = error
+                        return
+                    }
+                    guard let data = data else { return }
+                    
+                    let decoder = JSONDecoder()
+                    
+                    do {
+                        let severalDaysWeatherResponse = try decoder.decode(SeveralDaysWeatherResponse.self, from: data)
+                        severalDaysWeather = SeveralDaysWeather(response: severalDaysWeatherResponse)
+                        completion((currentWeatherResponse, severalDaysWeather), (currentWeatherResponseError, severalDaysWeatherError))
+                    }
+                    catch let error {
+                        severalDaysWeatherError = error
+                        completion((currentWeatherResponse, severalDaysWeather), (currentWeatherResponseError, severalDaysWeatherError))
+                    }
+                }
+            }
+            catch let error {
+                currentWeatherResponseError = error
+                completion((currentWeatherResponse, severalDaysWeather), (currentWeatherResponseError, severalDaysWeatherError))
+                return
             }
         }
     }

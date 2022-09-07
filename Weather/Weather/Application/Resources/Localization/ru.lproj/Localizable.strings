@@ -12,3 +12,5 @@
 "maxTemp" = "Макс. температура";
 "windSpeed" = "Скорость ветра";
 "humidity" = "Влажность";
+
+"searchBarPlaceholder" = "Поиск по городу";

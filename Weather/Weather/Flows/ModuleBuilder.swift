@@ -10,6 +10,7 @@ import UIKit
 
 protocol ModuleBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController
+    func createSearchModule(router: RouterProtocol) -> UIViewController
 }
 
 class ModuleBuilder: ModuleBuilderProtocol {
